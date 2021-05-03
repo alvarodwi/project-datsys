@@ -59,9 +59,9 @@ exports.findOne = (req,res) => {
 }
 
 exports.update = (req, res) => {
-  const id = req.params.idl;
+  const id = req.params.id;
 
-  Series.update(req,body,{
+  Series.update(req.body,{
       where: {id:id}
   })
   .then(num => {

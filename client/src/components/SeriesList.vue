@@ -18,7 +18,7 @@
       <ul class="list-group">
         <li class="list-group-item"
           :class="{ active: index == currentIndex }"
-          v-for="(serie, index) in series"
+          v-for="(serie, index) in seriesList"
           :key="index"
           @click="setActiveSeries(serie, index)"
         >
@@ -37,10 +37,7 @@
           <label><strong>Title:</strong></label> {{ currentSeries.title }}
         </div>
         <div>
-          <label><strong>Description:</strong></label> {{ currentSeries.description }}
-        </div>
-        <div>
-          <label><strong>Status:</strong></label> {{ currentSeries.published ? "Published" : "Pending" }}
+          <label><strong>JP Title:</strong></label> {{ currentSeries.jp_title }}
         </div>
 
         <a class="badge badge-warning"
@@ -64,7 +61,7 @@ export default {
   name: "series-list",
   data() {
     return {
-      series: [],
+      seriesList: [],
       currentSeries: null,
       currentIndex: -1,
       title: ""
@@ -74,7 +71,7 @@ export default {
     retrieveSeries() {
       SeriesDataService.getAll()
         .then(response => {
-          this.series = response.data;
+          this.seriesList = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -88,8 +85,8 @@ export default {
       this.currentIndex = -1;
     },
 
-    setActiveSeries(tutorial, index) {
-      this.currentSeries = tutorial;
+    setActiveSeries(series, index) {
+      this.currentSeries = series;
       this.currentIndex = index;
     },
 
@@ -107,7 +104,7 @@ export default {
     searchTitle() {
       SeriesDataService.findByTitle(this.title)
         .then(response => {
-          this.series = response.data;
+          this.seriesList = response.data;
           console.log(response.data);
         })
         .catch(e => {

@@ -14,24 +14,7 @@
           v-model="currentSeries.jp_title"
         />
       </div>
-
-      <div class="form-group">
-        <label><strong>Status:</strong></label>
-        {{ currentSeries.published ? "Published" : "Pending" }}
-      </div>
     </form>
-
-    <button class="badge badge-primary mr-2"
-      v-if="currentSeries.published"
-      @click="updatePublished(false)"
-    >
-      UnPublish
-    </button>
-    <button v-else class="badge badge-primary mr-2"
-      @click="updatePublished(true)"
-    >
-      Publish
-    </button>
 
     <button class="badge badge-danger mr-2"
       @click="deleteSeries"
@@ -69,24 +52,6 @@ export default {
       SeriesDataService.get(id)
         .then(response => {
           this.currentSeries = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-
-    updatePublished(status) {
-      var data = {
-        id: this.currentSeries.id,
-        title: this.currentSeries.title,
-        jp_title: this.currentSeries.jp_title,
-        published: status
-      };
-
-      SeriesDataService.update(this.currentSeries.id, data)
-        .then(response => {
-          this.currentSeries.published = status;
           console.log(response.data);
         })
         .catch(e => {

@@ -45,7 +45,6 @@ export default {
         id: null,
         title: "",
         jp_title: "",
-        published: false
       },
       submitted: false
     };

@@ -17,8 +17,8 @@ export default new Router({
             component: () => import("./components/Series")
         },
         {
-            path: "/series/add",
-            name: "series-add",
+            path: "/add",
+            name: "add-series",
             component: () => import("./components/AddSeries")
         }
     ]

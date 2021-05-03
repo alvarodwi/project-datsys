@@ -7,7 +7,7 @@
           <router-link to="/series" class="nav-link">Series</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/series/add" class="nav-link">Add Series</router-link>
+          <router-link to="/add" class="nav-link">Add Series</router-link>
         </li>
       </div>
     </nav>

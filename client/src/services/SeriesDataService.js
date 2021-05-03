@@ -14,7 +14,7 @@ class SeriesDataService{
     }
 
     update(id,data){
-        return http.post(`/series/${id}`,data);
+        return http.put(`/series/${id}`,data);
     }
 
     delete(id) {
