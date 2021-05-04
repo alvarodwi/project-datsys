@@ -1,19 +1,13 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, Sequelize) => {
-  class Series extends Model {}
-  Series.init(
+  class Label extends Model {}
+  Label.init(
     {
-      title: {
+      name: {
         type: Sequelize.STRING,
       },
-      jpTitle: {
-        type: Sequelize.STRING,
-      },
-      plot: {
-        type: Sequelize.TEXT,
-      },
-      genre: {
+      jpName: {
         type: Sequelize.STRING,
       },
       link: {
@@ -23,9 +17,9 @@ module.exports = (sequelize, Sequelize) => {
     {
       underscored: true,
       sequelize,
-      modelName: "series",
+      modelName: "label",
     }
   );
 
-  return Series;
+  return Label;
 };
