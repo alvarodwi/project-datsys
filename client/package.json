@@ -1,7 +1,7 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
+  "name": "project-datsys_client",
+  "version": "1.0.0",
+  "description": "Vue.js frontend w/ axios",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

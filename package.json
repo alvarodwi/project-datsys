@@ -1,0 +1,18 @@
+{
+  "name": "project-datsys",
+  "version": "1.0.0",
+  "description": "Projek UAS Praktikum Sistem Database",
+  "scripts": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvarodwi/project-datsys.git"
+  },
+  "author": "alvarodwi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvarodwi/project-datsys/issues"
+  },
+  "homepage": "https://github.com/alvarodwi/project-datsys#readme"
+}
