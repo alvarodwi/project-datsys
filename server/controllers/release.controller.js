@@ -1,5 +1,5 @@
 const { Op, where } = require("sequelize");
-const db = require("../models/");
+const db = require("../models");
 const { response, getPagination, getPagingData } = require("../utils/helpers");
 
 exports.get = async (req, res) => {
@@ -7,7 +7,7 @@ exports.get = async (req, res) => {
 
   const { limit, offset } = getPagination(page, size);
 
-  var data = await db.Novel.findAndCountAll({
+  var data = await db.Release.findAndCountAll({
     where: where,
     limit: limit,
     offset: offset,
@@ -28,7 +28,7 @@ exports.detail = async (req, res) => {
     id: req.params.id,
   };
 
-  var result = await db.Novel.findOne({
+  var result = await db.Release.findOne({
     where: where,
     include: {
       all: true,
@@ -36,7 +36,7 @@ exports.detail = async (req, res) => {
     },
   });
 
-  if (!result) return response(res, 404, "Data Novel tidak ditemukan", {});
+  if (!result) return response(res, 404, "Data Release tidak ditemukan", {});
 
   response(res, 200, "success", result);
 };
@@ -45,49 +45,47 @@ exports.store = async (req, res) => {
   var result = {};
 
   if (req.params.id) {
-    result = await db.Novel.findOne({
+    result = await db.Release.findOne({
       where: { id: req.params.id },
       include: { all: true, nested: true },
     });
-    if (!result) return response(res, 404, "Data Novel tidak ditemukan", {});
+    if (!result) return response(res, 404, "Data Release tidak ditemukan", {});
   }
 
   var data = {
-    title: req.body.title,
-    jpTitle: req.body.jpTitle,
-    plot: req.body.plot,
-    genre: req.body.genre,
-    link: req.body.link,
-    authorId: req.body.authorId,
-    illustratorId: req.body.illustratorId,
-    labelId: req.body.labelId,
+    volumeNumber: req.body.volumeNumber,
+    date: req.body.date,
+    coverUrl: req.body.coverUrl,
+    page: req.body.page,
+    storeUrl: req.body.storeUrl,
+    novelId: req.body.novelId,
   };
 
   if (req.params.id) {
     await result.update(data);
   } else {
-    result = await db.Novel.create(data);
+    result = await db.Release.create(data);
   }
 
   response(
     res,
     200,
-    (!req.params.id ? "Tambah" : "Ubah") + `data novel berhasil`,
+    (!req.params.id ? "Tambah" : "Ubah") + `data Release berhasil`,
     await result.toJson()
   );
 };
 
 exports.delete = async (req, res) => {
-  var result = await db.Novel.findOne({
+  var result = await db.Release.findOne({
     where: { id: req.params.id },
     include: {
       all: true,
       nested: true,
     },
   });
-  if (!result) return response(res, 404, "Data Novel tidak ditemukan", {});
+  if (!result) return response(res, 404, "Data Release tidak ditemukan", {});
 
   await result.destroy();
 
-  return response(res, 200, "Data Novel berhasil dihapus", {});
+  return response(res, 200, "Data Release berhasil dihapus", {});
 };
