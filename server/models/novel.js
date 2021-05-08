@@ -21,9 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       plot: DataTypes.TEXT,
       genre: DataTypes.STRING,
       link: DataTypes.STRING,
-      // authorId: DataTypes.INTEGER,
-      // illustratorId: DataTypes.INTEGER,
-      // labelId: DataTypes.INTEGER,
     },
     {
       sequelize,

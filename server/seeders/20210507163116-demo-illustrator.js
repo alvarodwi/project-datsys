@@ -1,24 +1,34 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    await queryInterface.bulkInsert(
+      "illustrators",
+      [
+        {
+          name: "Shirabi",
+          jpName: "しらび",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Touko Shino",
+          jpName: "しのとうこ",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Noboru Kannatuki",
+          jpName: "神奈月昇",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+    await queryInterface.bulkDelete("illustrators", null, { truncate: true });
+  },
 };

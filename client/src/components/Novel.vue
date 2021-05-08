@@ -1,29 +1,29 @@
 <template>
-  <div v-if="currentSeries" class="edit-form">
-    <h4>Series</h4>
+  <div v-if="currentNovel" class="edit-form">
+    <h4>Novel</h4>
     <form>
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title"
-          v-model="currentSeries.title"
+          v-model="currentNovel.title"
         />
       </div>
       <div class="form-group">
-        <label for="jp_title">JP Title</label>
-        <input type="text" class="form-control" id="jp_title"
-          v-model="currentSeries.jp_title"
+        <label for="jpTitle">JP Title</label>
+        <input type="text" class="form-control" id="jpTitle"
+          v-model="currentNovel.jpTitle"
         />
       </div>
     </form>
 
     <button class="badge badge-danger mr-2"
-      @click="deleteSeries"
+      @click="deleteNovel"
     >
       Delete
     </button>
 
     <button type="submit" class="badge badge-success"
-      @click="updateSeries"
+      @click="updateNovel"
     >
       Update
     </button>
@@ -32,26 +32,26 @@
 
   <div v-else>
     <br />
-    <p>Please click on a Series...</p>
+    <p>Please click on a Novel...</p>
   </div>
 </template>
 
 <script>
-import SeriesDataService from "../services/SeriesDataService";
+import NovelDataService from "../services/NovelDataService";
 
 export default {
-  name: "series",
+  name: "novel",
   data() {
     return {
-      currentSeries: null,
+      currentNovel: null,
       message: ''
     };
   },
   methods: {
-    getSeries(id) {
-      SeriesDataService.get(id)
+    getNovel(id) {
+      NovelDataService.get(id)
         .then(response => {
-          this.currentSeries = response.data;
+          this.currentNovel = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -59,22 +59,22 @@ export default {
         });
     },
 
-    updateSeries() {
-      SeriesDataService.update(this.currentSeries.id, this.currentSeries)
+    updateNovel() {
+      NovelDataService.update(this.currentNovel.id, this.currentNovel)
         .then(response => {
           console.log(response.data);
-          this.message = 'The series was updated successfully!';
+          this.message = 'The novel was updated successfully!';
         })
         .catch(e => {
           console.log(e);
         });
     },
 
-    deleteSeries() {
-      SeriesDataService.delete(this.currentSeries.id)
+    deleteNovel() {
+      NovelDataService.delete(this.currentNovel.id)
         .then(response => {
           console.log(response.data);
-          this.$router.push({ name: "series" });
+          this.$router.push({ name: "novel" });
         })
         .catch(e => {
           console.log(e);
@@ -83,7 +83,7 @@ export default {
   },
   mounted() {
     this.message = '';
-    this.getSeries(this.$route.params.id);
+    this.getNovel(this.$route.params.id);
   }
 };
 </script>

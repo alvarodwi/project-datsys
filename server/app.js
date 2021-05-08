@@ -14,6 +14,6 @@ app.use(
   helmet()
 );
 
-app.use("/novel", require("./routes/novel.route"));
+app.use("/api/novel", require("./routes/novel.route"));
 
 module.exports = app;

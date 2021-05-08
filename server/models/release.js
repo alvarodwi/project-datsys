@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       coverUrl: DataTypes.STRING,
       page: DataTypes.INTEGER,
       storeUrl: DataTypes.STRING,
-      // novelId: DataTypes.INTEGER,
     },
     {
       sequelize,

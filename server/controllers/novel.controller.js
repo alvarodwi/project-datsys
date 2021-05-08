@@ -1,7 +1,6 @@
-const { response } = require("express");
 const { Op, where } = require("sequelize");
 const db = require("../models/");
-const { getPagination, getPagingData } = require("../utils/helpers");
+const { response, getPagination, getPagingData } = require("../utils/helpers");
 
 exports.get = async (req, res) => {
   const { page, size } = req.query;
@@ -56,9 +55,6 @@ exports.store = async (req, res) => {
     plot: req.body.plot,
     genre: req.body.genre,
     link: req.body.link,
-    authorId: req.body.authorId,
-    illustratorId: req.body.illustratorId,
-    labelId: req.body.labelId,
   };
 
   if (req.params.id) {

@@ -8,7 +8,7 @@
           class="form-control"
           id="title"
           required
-          v-model="series.title"
+          v-model="novel.title"
           name="title"
         />
       </div>
@@ -19,29 +19,29 @@
           class="form-control"
           id="jp_title"
           required
-          v-model="series.jp_title"
+          v-model="novel.jp_title"
           name="jp_title"
         />
       </div>
 
-      <button @click="saveSeries" class="btn btn-success">Submit</button>
+      <button @click="saveNovel" class="btn btn-success">Submit</button>
     </div>
 
     <div v-else>
       <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newSeries">Add</button>
+      <button class="btn btn-success" @click="newNovel">Add</button>
     </div>
   </div>
 </template>
 
 <script>
-import SeriesDataService from "../services/SeriesDataService";
+import NovelDataService from "../services/NovelDataService";
 
 export default {
-  name: "add-series",
+  name: "add-novel",
   data() {
     return {
-      series: {
+      novel: {
         id: null,
         title: "",
         jp_title: "",
@@ -50,15 +50,15 @@ export default {
     };
   },
   methods: {
-    saveSeries() {
+    saveNovel() {
       var data = {
-        title: this.series.title,
-        jp_title: this.series.jp_title
+        title: this.novel.title,
+        jp_title: this.novel.jp_title
       };
 
-      SeriesDataService.create(data)
+      NovelDataService.create(data)
         .then(response => {
-          this.series.id = response.data.id;
+          this.novel.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
         })
@@ -67,9 +67,9 @@ export default {
         });
     },
     
-    newSeries() {
+    newNovel() {
       this.submitted = false;
-      this.series = {};
+      this.novel = {};
     }
   }
 };

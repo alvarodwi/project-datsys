@@ -4,10 +4,10 @@
       <router-link to="/" class="navbar-brand">Project-Datsys</router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link to="/series" class="nav-link">Series</router-link>
+          <router-link to="/novel" class="nav-link">Novel</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/add" class="nav-link">Add Series</router-link>
+          <router-link to="/novel/add" class="nav-link">Add Novel</router-link>
         </li>
       </div>
     </nav>

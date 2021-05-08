@@ -23,9 +23,6 @@ module.exports = {
       storeUrl: {
         type: Sequelize.STRING,
       },
-      // novelId: {
-      //   type: Sequelize.INTEGER
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
