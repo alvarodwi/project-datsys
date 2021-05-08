@@ -23,6 +23,15 @@ module.exports = {
       link: {
         type: Sequelize.STRING,
       },
+      authorId: {
+        type: Sequelize.INTEGER,
+      },
+      illustratorId: {
+        type: Sequelize.INTEGER,
+      },
+      labelId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

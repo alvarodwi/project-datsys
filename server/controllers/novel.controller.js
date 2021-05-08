@@ -11,10 +11,12 @@ exports.get = async (req, res) => {
     where: where,
     limit: limit,
     offset: offset,
-    include: {
-      all: true,
-      nested: true,
-    },
+    include: [
+      {
+        all: true,
+        nested: true,
+      },
+    ],
   });
 
   response(res, 200, "success", getPagingData(data, page, limit));
@@ -55,6 +57,9 @@ exports.store = async (req, res) => {
     plot: req.body.plot,
     genre: req.body.genre,
     link: req.body.link,
+    authorId: req.body.authorId,
+    illustratorId: req.body.illustratorId,
+    labelId: req.body.labelId,
   };
 
   if (req.params.id) {
