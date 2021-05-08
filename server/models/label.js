@@ -17,7 +17,13 @@ module.exports = (sequelize, DataTypes) => {
   Label.associate = function (models) {
     Label.hasMany(models.Novel, {
       foreignKey: "labelId",
+      as: "novels",
     });
   };
+
+  Label.prototype.toJSON = function () {
+    return Object.assign({}, this.get());
+  };
+
   return Label;
 };

@@ -72,8 +72,8 @@ exports.store = async (req, res) => {
   response(
     res,
     200,
-    (!req.params.id ? "Tambah" : "Ubah") + `data novel berhasil`,
-    await result.toJson()
+    (!req.params.id ? "Tambah" : "Ubah") + ` data Novel berhasil`,
+    await result.toJSON()
   );
 };
 

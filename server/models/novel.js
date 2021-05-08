@@ -22,16 +22,25 @@ module.exports = (sequelize, DataTypes) => {
   Novel.associate = function (models) {
     Novel.belongsTo(models.Author, {
       foreignKey: "authorId",
+      as: "author",
     });
     Novel.belongsTo(models.Illustrator, {
       foreignKey: "illustratorId",
+      as: "illustrator",
     });
     Novel.belongsTo(models.Label, {
       foreignKey: "labelId",
+      as: "label",
     });
     Novel.hasMany(models.Release, {
       foreignKey: "novelId",
+      as: "releases",
     });
   };
+
+  Novel.prototype.toJSON = function () {
+    return Object.assign({}, this.get());
+  };
+
   return Novel;
 };

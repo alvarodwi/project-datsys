@@ -70,8 +70,8 @@ exports.store = async (req, res) => {
   response(
     res,
     200,
-    (!req.params.id ? "Tambah" : "Ubah") + `data Release berhasil`,
-    await result.toJson()
+    (!req.params.id ? "Tambah" : "Ubah") + ` data Release berhasil`,
+    await result.toJSON()
   );
 };
 

@@ -16,7 +16,13 @@ module.exports = (sequelize, DataTypes) => {
   Author.associate = function (models) {
     Author.hasMany(models.Novel, {
       foreignKey: "authorId",
+      as: "novels",
     });
   };
+
+  Author.prototype.toJSON = function () {
+    return Object.assign({}, this.get());
+  };
+
   return Author;
 };

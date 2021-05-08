@@ -20,7 +20,13 @@ module.exports = (sequelize, DataTypes) => {
   Release.associate = function (models) {
     Release.belongsTo(models.Novel, {
       foreignKey: "novelId",
+      as: "novel",
     });
   };
+
+  Release.prototype.toJSON = function () {
+    return Object.assign({}, this.get());
+  };
+
   return Release;
 };
