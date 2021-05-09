@@ -1,14 +1,46 @@
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
+const { sequelize } = require("../models/");
 const db = require("../models/");
 const { response, getPagination, getPagingData } = require("../utils/helpers");
 
+const handleSorting = (sortBy, order) => {
+  order = order ? order : "asc";
+
+  if (sortBy == "title") {
+    return ["title", `${order}`];
+  } else if (sortBy == "total_volume") {
+    return [sequelize.literal("totalVolume"), `${order}`];
+  } else if (sortBy == "last_release") {
+    return [sequelize.literal("lastRelease"), `${order}`];
+  }
+};
+
 exports.get = async (req, res) => {
-  const { page, size } = req.query;
+  const { page, size, title, sort_by, order } = req.query;
+  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  var sort = sort_by ? [handleSorting(sort_by, order)] : [];
 
   const { limit, offset } = getPagination(page, size);
 
   var data = await db.Novel.findAndCountAll({
-    where: where,
+    attributes: {
+      include: [
+        [
+          sequelize.literal(`(SELECT COUNT(*)
+        FROM releases r
+        WHERE novel.id = r.novelId)`),
+          "totalVolume",
+        ],
+        [
+          sequelize.literal(`(SELECT MAX(r.date)
+        FROM releases r
+        WHERE novel.id = r.novelId)`),
+          "lastRelease",
+        ],
+      ],
+    },
+    where: condition,
+    order: sort,
     limit: limit,
     offset: offset,
     distinct: true,

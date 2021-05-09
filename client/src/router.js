@@ -9,17 +9,22 @@ export default new Router({
     {
       path: "/novel",
       name: "novel",
-      component: () => import("./components/NovelList"),
+      component: () => import("./components/DataTableNovel"),
     },
     {
-      path: "/novel/:id",
-      name: "novel-details",
-      component: () => import("./components/Novel"),
+      path: "/author",
+      name: "author",
+      component: () => import("./components/DataTableNovel"),
     },
     {
-      path: "/novel/add",
-      name: "add-novel",
-      component: () => import("./components/AddNovel"),
+      path: "/illustrator",
+      name: "illustrator",
+      component: () => import("./components/DataTableNovel"),
+    },
+    {
+      path: "/label",
+      name: "label",
+      component: () => import("./components/DataTableNovel"),
     },
   ],
 });

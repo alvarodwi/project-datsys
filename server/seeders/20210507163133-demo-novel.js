@@ -32,8 +32,8 @@ module.exports = {
         {
           title: "86 -eightysix-",
           jpTitle: "86―エイティシックス―",
-          plot: "Action, Drama, Mecha, Science Fiction",
-          genre: "Drama, Historical, Mystery, Romance, Slice of Life",
+          plot: "",
+          genre: "Action, Drama, Mecha, Science Fiction",
           link: "http://dengekitaisho.jp/special/23/eighty-six/",
           authorId: 3,
           illustratorId: 3,
