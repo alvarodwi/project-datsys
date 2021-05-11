@@ -1,60 +1,109 @@
 <template>
-  <div>
-    <h1>Data Table Novel</h1>
-
-    <div>
-      <t-input v-model="searchTitle" @input="handleUpdateParams()" />
-    </div>
-
-    <div>
-      <div>
-        <t-rich-select
-          v-model="sortBy"
-          :options="['title', 'total_volume', 'last_release']"
-          @change="handleUpdateParams()"
-        ></t-rich-select>
+  <div class="container mx-auto px-4 sm:px-8 max-w-8xl rounded-lg">
+    <div class="py-8">
+      <div class="py-2 text-sepia-500">
+        <h1 class="text-4xl leading-tight font-semibold tracking-wider">
+          Novels
+        </h1>
+        <p class="text-lg leading-tight">
+          A list of novels we currently indexes.
+        </p>
+      </div>
+      <div class="container min-w-full">
+        <input
+          type="text"
+          class="rounded-lg border-transparent flex-1 appearance-none border border-steel-500 w-full py-2 px-4 bg-sepia-500 text-steel-700 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-steel-600 focus:border-transparent"
+          placeholder="search title..."
+          v-model="searchTitle"
+          v-on:change="handleUpdateParams"
+        />
+      </div>
+      <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+        <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+          <table class="min-w-full leading-normal">
+            <thead>
+              <tr class="font-bold text-left text-lg">
+                <th
+                  scope="col"
+                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
+                >
+                  Title
+                </th>
+                <th
+                  scope="col"
+                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
+                >
+                  Author
+                </th>
+                <th
+                  scope="col"
+                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
+                >
+                  Illustrator
+                </th>
+                <th
+                  scope="col"
+                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
+                >
+                  Last Release
+                </th>
+                <th
+                  scope="col"
+                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
+                >
+                  Volumes
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(novel, index) in novels" :key="index">
+                <td
+                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
+                >
+                  <div class="font-semibold">
+                    {{ novel.title }}
+                  </div>
+                  <div class="text-sm">
+                    {{ novel.jpTitle }}
+                  </div>
+                </td>
+                <td
+                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
+                >
+                  {{ novel.author.name }}
+                </td>
+                <td
+                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
+                >
+                  {{ novel.illustrator.name }}
+                </td>
+                <td
+                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
+                >
+                  {{ dayjs(novel.lastRelease).format("MMMM DD, YYYY") }}
+                </td>
+                <td
+                  class="py-4 px-8 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
+                >
+                  {{ novel.totalVolume }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="px-5 bg-sepia-500 py-5 flex flex-col xs:flex-row items-center xs:justify-between"
+          >
+            <t-pagination
+              :total-items="totalRows"
+              :per-page="pageSize"
+              :limit="3"
+              v-model="page"
+              @change="handlePageChange"
+            />
+          </div>
+        </div>
       </div>
     </div>
-
-    <t-table
-      :headers="[
-        'Title',
-        'JP Title',
-        'Author',
-        'Illustrator',
-        'Total Volume',
-        'Last Release',
-      ]"
-      :data="novels"
-    >
-      <template slot="row" slot-scope="props">
-        <tr
-          :class="[
-            props.trClass,
-            props.rowIndex % 2 === 0 ? 'bg-gray-100' : '',
-          ]"
-        >
-          <td :class="props.tdClass">
-            {{ props.row.title }}
-          </td>
-          <td :class="props.tdClass">
-            {{ props.row.jpTitle }}
-          </td>
-          <td :class="props.tdClass">
-            {{ props.row.author.name }}
-          </td>
-          <td :class="props.tdClass">
-            {{ props.row.illustrator.name }}
-          </td>
-          <td :class="props.tdClass">
-            {{ props.row.totalVolume }}
-          </td>
-          <td :class="props.tdClass">
-            {{ moment(props.row.lastRelease).format("MMMM DD, YYYY") }}
-          </td>
-        </tr>
-      </template>
-    </t-table>
   </div>
 </template>
 
@@ -71,8 +120,9 @@ export default {
       ordering: "asc",
 
       page: 1,
-      count: 0,
-      pageSize: 10,
+      totalRows: 0,
+      totalPages: 0,
+      pageSize: 2,
 
       pageSizes: [10, 20, 40],
     };
@@ -118,7 +168,8 @@ export default {
         .then((response) => {
           const pagingData = response.data.data;
           this.novels = pagingData.result;
-          this.count = pagingData.totalItems;
+          this.totalRows = pagingData.totalItems;
+          this.totalPages = pagingData.totalPages;
           console.log(pagingData);
         })
         .catch((e) => {

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Projek UAS Praktikum Sistem Database",
   "scripts": {
-    
+    "start-server": "cd server && npm run start",
+    "start-client": "cd client && npm run serve"
   },
   "repository": {
     "type": "git",
