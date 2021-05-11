@@ -2,19 +2,19 @@
   <div class="container mx-auto px-4 sm:px-8 max-w-8xl rounded-lg">
     <div class="py-8">
       <div class="py-2 text-sepia-500">
-        <h1 class="text-4xl leading-tight font-semibold tracking-wider">
-          Novels
+        <h1 class="text-4xl font-semibold tracking-wider">
+          Authors
         </h1>
-        <p class="text-lg leading-tight">
-          A list of novels we currently indexes.
+        <p class="text-lg">
+          A list of author of authors we currently indexes.
         </p>
       </div>
       <div class="container min-w-full">
         <input
           type="text"
           class="rounded-lg border-transparent flex-1 appearance-none border border-steel-500 w-full py-2 px-4 bg-sepia-500 text-steel-700 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-steel-600 focus:border-transparent"
-          placeholder="search title..."
-          v-model="searchTitle"
+          placeholder="search name..."
+          v-model="searchName"
           v-on:change="handleUpdateParams"
         />
       </div>
@@ -27,65 +27,24 @@
                   scope="col"
                   class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
                 >
-                  Title
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Author
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Illustrator
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Last Release
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Volumes
+                  Name
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(novel, index) in novels" :key="index">
+              <tr v-for="(author, index) in authors" :key="index">
                 <td
                   class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
                   <div class="font-semibold">
-                    {{ novel.title }}
+                    {{ author.name }}
                   </div>
                   <div class="text-sm">
-                    {{ novel.jpTitle }}
+                    {{ author.jpName }}
                   </div>
-                </td>
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{ novel.author.name }}
-                </td>
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{ novel.illustrator.name }}
-                </td>
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{ dayjs(novel.lastRelease).format("MMMM DD, YYYY") }}
-                </td>
-                <td
-                  class="py-4 px-8 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{ novel.totalVolume }}
+                  <router-link :to="'/author/' + author.id" class="text-sm"
+                    >Details</router-link
+                  >
                 </td>
               </tr>
             </tbody>
@@ -108,31 +67,31 @@
 </template>
 
 <script>
-import NovelDataService from "../services/NovelDataService";
+import AuthorDataService from "../../../services/AuthorDataService";
 
 export default {
-  name: "novel-list",
+  name: "author-list",
   data() {
     return {
-      novels: [],
-      searchTitle: "",
-      sortBy: "title",
+      authors: [],
+      searchName: "",
+      sortBy: "name",
       ordering: "asc",
 
       page: 1,
       totalRows: 0,
       totalPages: 0,
-      pageSize: 2,
+      pageSize: 10,
 
       pageSizes: [10, 20, 40],
     };
   },
   methods: {
-    getRequestParams(searchTitle, page, pageSize, sortBy, ordering) {
+    getRequestParams(searchName, page, pageSize, sortBy, ordering) {
       let params = {};
 
-      if (searchTitle) {
-        params["title"] = searchTitle;
+      if (searchName) {
+        params["name"] = searchName;
       }
 
       if (page) {
@@ -153,9 +112,9 @@ export default {
 
       return params;
     },
-    retrieveNovel() {
+    retrieveAuthor() {
       const params = this.getRequestParams(
-        this.searchTitle,
+        this.searchName,
         this.page,
         this.pageSize,
         this.sortBy,
@@ -164,10 +123,10 @@ export default {
 
       console.log(params);
 
-      NovelDataService.getAll(params)
+      AuthorDataService.getAll(params)
         .then((response) => {
           const pagingData = response.data.data;
-          this.novels = pagingData.result;
+          this.authors = pagingData.result;
           this.totalRows = pagingData.totalItems;
           this.totalPages = pagingData.totalPages;
           console.log(pagingData);
@@ -179,22 +138,22 @@ export default {
 
     handleUpdateParams() {
       this.page = 1;
-      this.retrieveNovel();
+      this.retrieveAuthor();
     },
 
     handlePageChange(value) {
       this.page = value;
-      this.retrieveNovel();
+      this.retrieveAuthor();
     },
 
     handlePageSizeChange(event) {
       this.pageSize = event.target.value;
       this.page = 1;
-      this.retrieveNovel;
+      this.retrieveAuthor;
     },
   },
   mounted() {
-    this.retrieveNovel();
+    this.retrieveAuthor();
   },
 };
 </script>

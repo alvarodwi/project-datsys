@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class SeriesDataService {
+class NovelDataService {
   getAll(params) {
     return http.get("/novel", { params });
   }
@@ -22,4 +22,4 @@ class SeriesDataService {
   }
 }
 
-export default new SeriesDataService();
+export default new NovelDataService();

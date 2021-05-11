@@ -1,22 +1,32 @@
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 const db = require("../models/");
 const { response, getPagination, getPagingData } = require("../utils/helpers");
 
+const handleSorting = (sortBy, order) => {
+  order = order ? order : "asc";
+
+  if (sortBy == "name") {
+    return ["name", `${order}`];
+  }
+};
+
 exports.get = async (req, res) => {
-  const { page, size } = req.query;
+  const { page, size, name, sort_by, order } = req.query;
+  var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
+  var sort = sort_by ? [handleSorting(sort_by, order)] : [];
 
   const { limit, offset } = getPagination(page, size);
 
   var data = await db.Author.findAndCountAll({
-    where: where,
+    where: condition,
     limit: limit,
+    order: sort,
     offset: offset,
     distinct: true,
 
     include: [
       {
         all: true,
-        nested: true,
       },
     ],
   });

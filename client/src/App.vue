@@ -1,30 +1,30 @@
 <template>
   <div id="app">
-    <header>
+    <header class="sticky top-0">
       <nav class="flex items-center justify-center flex-wrap bg-steel-500 p-4">
-        <div class="w-full block md:flex md:justify-end md:w-auto">
+        <div class="flex w-auto md:text-sm">
           <div class="font-sans">
             <router-link
               to="/novel"
-              class="block md:inline-block text-xl text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
+              class="inline-block text-base md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Novel
             </router-link>
             <router-link
-              to="/novel"
-              class="block md:inline-block text-xl text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
+              to="/author"
+              class="inline-block text-base md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Author
             </router-link>
             <router-link
-              to="/novel"
-              class="block md:inline-block text-xl text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
+              to="/illustrator"
+              class="inline-block text-base md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Illustrator
             </router-link>
             <router-link
-              to="/novel"
-              class="block md:inline-block text-xl text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
+              to="/label"
+              class="inline-block text-base md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Label
             </router-link>
