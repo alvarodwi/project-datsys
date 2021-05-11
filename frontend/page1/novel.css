@@ -1,0 +1,20 @@
+#btnvla {
+    position: absolute;
+    width: 128px;
+    height: 60px;
+    left: 570px;
+    top: 20px;
+    
+    font-size: 30px;
+    font-weight: 500;
+    padding: none;
+    min-width: max-content;
+    border: 0;
+    outline: 0;
+    color: #3B4954;
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+    position: absolute;
+    background-color: #F5E2CF;
+    border-radius: 20px;
+}
