@@ -88,5 +88,10 @@ export default new Router({
       name: "illustrator-debug",
       component: () => import("./components/crud/illustrator/IllustratorCard"),
     },
+    {
+      path: "/label-debug",
+      name: "label-debug",
+      component: () => import("./components/crud/label/LabelCard"),
+    },
   ],
 });
