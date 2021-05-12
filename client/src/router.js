@@ -83,5 +83,10 @@ export default new Router({
       name: "author-debug",
       component: () => import("./components/crud/author/AuthorCard"),
     },
+    {
+      path: "/illustrator-debug",
+      name: "illustrator-debug",
+      component: () => import("./components/crud/illustrator/IllustratorCard"),
+    },
   ],
 });
