@@ -55,28 +55,15 @@ p {
 
 p {
   margin: 0 auto;
-  padding-left: 20px;
   font-family: Lexend Exa;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
   line-height: 45px;
-}
-
-a {
-  margin: 0 auto;
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 100;
-  font-variant-ligatures: normal;
-  font-size: 2rem;
-  letter-spacing: 1px;
 }
 
 body {
   font-family: hind;
   background-color: #57626b;
-  margin: 0px;
 }
 
 #home {
