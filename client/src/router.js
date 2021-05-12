@@ -78,5 +78,10 @@ export default new Router({
       name: "novel-debug",
       component: () => import("./components/crud/novel/NovelCard"),
     },
+    {
+      path: "/author-debug",
+      name: "author-debug",
+      component: () => import("./components/crud/author/AuthorCard"),
+    },
   ],
 });
