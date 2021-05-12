@@ -16,6 +16,12 @@
 </template>
 
 <style scoped>
+p {
+    margin: 0 auto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+}
 a{
     margin: 0 auto;
     text-decoration: none;
