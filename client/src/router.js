@@ -53,5 +53,25 @@ export default new Router({
       name: "label-detail",
       component: () => import("./components/crud/label/LabelDetail"),
     },
+    {
+      path: "/novel-add",
+      name: "novel-add",
+      component: () => import("./components/crud/novel/NovelForm"),
+    },
+    {
+      path: "/illustrator-add",
+      name: "illustrator-add",
+      component: () => import("./components/crud/illustrator/IllustratorForm"),
+    },
+    {
+      path: "/author-add",
+      name: "author-add",
+      component: () => import("./components/crud/author/AuthorForm"),
+    },
+    {
+      path: "/label-add",
+      name: "label-add",
+      component: () => import("./components/crud/label/LabelForm"),
+    },
   ],
 });
