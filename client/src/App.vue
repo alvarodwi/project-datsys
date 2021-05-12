@@ -38,6 +38,23 @@
   </div>
 </template>
 
+<style>
+nav{
+    position: relative;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    top: 100%;
+    left: 0;
+}
+header{
+    text-align: center;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+}
+</style>
+
 <script>
 export default {
   name: "app",
