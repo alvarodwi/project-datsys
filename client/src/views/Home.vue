@@ -12,11 +12,7 @@
         <div id="right">
           <img class="gambar" src="../assets/img/ram.jpg" alt="ram" />
           <img class="gambar" src="../assets/img/hyoka.jpg" alt="hyouka" />
-          <img
-            class="gambar"
-            src="../assets/img/dunno.jpg"
-            alt="succubus tryin to be smart"
-          />
+          <img class="gambar" src="../assets/img/dunno.jpg" alt="succubus tryin to be smart" />
           <img class="gambar" src="../assets/img/mogami.jpg" alt="mogami" />
           <img class="gambar" src="../assets/img/poi.jpg" alt="yuudachi" />
           <img class="gambar" src="../assets/img/koakuma.jpg" alt="koakuma" />
@@ -163,7 +159,7 @@ body {
   margin: 0 2.2em;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .gambar {
     width: 200%;
   }

@@ -32,7 +32,7 @@
         </div>
       </nav>
     </header>
-    <div class="container">
+    <div>
       <router-view />
     </div>
   </div>
