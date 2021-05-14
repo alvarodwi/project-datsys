@@ -6,13 +6,13 @@
           <h1 class="text-4xl font-semibold tracking-wider">
             Novels
           </h1>
-          <p class="text-lg">
+          <p class="mr-auto text-lg">
             A list of novels we currently indexes.
           </p>
         </div>
         <div class="flex flex-row-reverse w-1/5">
           <button
-            class="self-end py-2 px-4 m-4 bg-steel-600 hover:bg-steel-700 focus:ring-steel-500 focus:ring-offset-steel-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+            class="self-end py-2 px-4 m-4 bg-geyser-600 hover:bg-geyser-700 focus:ring-geyser-500 focus:ring-offset-geyser-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
             @click="$router.push('novel-add')"
           >
             Add Novel
@@ -40,88 +40,12 @@
         />
       </div>
       <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-        <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-          <table class="min-w-full leading-normal">
-            <thead>
-              <tr class="font-bold text-left text-lg">
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Title
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Author
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Illustrator
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Last Release
-                </th>
-                <th
-                  scope="col"
-                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
-                >
-                  Volumes
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(novel, index) in novels" :key="index">
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  <div class="font-semibold">
-                    {{ novel.title }}
-                  </div>
-                  <div class="text-sm">
-                    {{ novel.jpTitle }}
-                  </div>
-                  <router-link :to="'/novel/' + novel.id" class="text-sm"
-                    >Details</router-link
-                  >
-                </td>
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{ !_.isEmpty(novel.author) ? novel.author.name : "-" }}
-                </td>
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{
-                    !_.isEmpty(novel.illustrator) ? novel.illustrator.name : "-"
-                  }}
-                </td>
-                <td
-                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{
-                    !_.isEmpty(novel.releases)
-                      ? dayjs(novel.lastRelease).format("MMMM DD, YYYY")
-                      : "-"
-                  }}
-                </td>
-                <td
-                  class="py-4 px-8 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
-                >
-                  {{ !_.isEmpty(novel.releases) ? novel.totalVolume : "-" }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="inline-block min-w-full rounded-lg overflow-hidden">
+          <div v-for="(novel, index) in novels" :key="index">
+            <novel-card :novel="novel"></novel-card>
+          </div>
           <div
-            class="px-5 bg-sepia-500 py-5 flex flex-col xs:flex-row items-center xs:justify-between"
+            class="px-5 py-5 flex flex-col xs:flex-row items-center xs:justify-between"
           >
             <t-pagination
               :total-items="totalRows"
@@ -138,13 +62,15 @@
 </template>
 
 <script>
-import SortButton from "../../components/base/SortButton.vue";
+import SortButton from "../../components/base/SortButton";
+import NovelCard from "../../components/crud/novel/NovelCard.vue";
 import NovelDataService from "../../services/NovelDataService";
 
 export default {
   name: "novel-list",
   components: {
     SortButton,
+    NovelCard,
   },
   data() {
     SortButton;

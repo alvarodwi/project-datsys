@@ -1,38 +1,45 @@
 <template>
-  <a class="card" href="http://lndb.info/light_novel/Adachi_to_Shimamura">
-    <img
-      class="card-image"
-      src="../../../assets/img/adachi.jpeg"
-      alt="adachi"
-    />
+  <router-link class="card" :to="'/novel/' + novel.id">
+    <img class="card-image" :src="novel.releases[0].coverUrl" alt="adachi" />
     <div class="card-content">
-      <h2 class="card-title">Adachi to Shimamura</h2>
-      <p id="info">安達としまむら<br /><br /></p>
-      <p id="info">by Hitoma Iruma, Non</p>
+      <h2 class="card-title">{{ novel.title }}</h2>
+      <p id="info">{{ novel.jpTitle }}<br /><br /></p>
+      <p id="info">
+        by
+        <router-link :to="'/author/' + novel.author.id"
+          ><span class="text-2xl">{{ novel.author.name }}</span></router-link
+        >,
+        <router-link
+          class="text-sm"
+          :to="'/illustrator/' + novel.illustrator.id"
+          ><span class="text-2xl">{{ novel.illustrator.name }}</span></router-link
+        >
+      </p>
+      <p id="info">
+        published on
+        <router-link :to="'/label/' + novel.label.id">
+          <span class="text-2xl">{{ novel.label.name }}</span>
+        </router-link>
+      </p>
       <div id="datevol">
-        <p class="card-date">last released on 10/10/2020</p>
+        <p class="card-date">
+          last released on
+          {{ dayjs(novel.lastRelease).format("MMMM DD, YYYY") }}
+        </p>
         <div class="card-vol">
-          <p id="info">9 volumes</p>
+          <p id="info">{{ novel.totalVolume }} volumes</p>
         </div>
       </div>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>
-import NovelDataService from "../../../services/NovelDataService";
-
 export default {
-  methods: {
-    deleteNovel() {
-      NovelDataService.delete(this.novel.id)
-        .then((response) => {
-          console.log(response.data);
-          this.$router.push({ name: "novel" });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+  props: {
+    novel: {
+      type: Object,
+      required: true,
     },
   },
 };
@@ -57,7 +64,7 @@ a {
 .card {
   font-size: 12px;
   margin: 32px auto;
-  width: 60%;
+  width: 75%;
   height: min-content;
   border-radius: 8px;
   background-color: #f5e2cf;

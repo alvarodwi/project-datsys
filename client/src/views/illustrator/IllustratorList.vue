@@ -5,7 +5,7 @@
         <h1 class="text-4xl font-semibold tracking-wider">
           Illustrators
         </h1>
-        <p class="text-lg">
+        <p class="mr-auto text-lg">
           A list of illustrator of illustrators we currently indexes.
         </p>
       </div>

@@ -104,7 +104,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Hind", "sans-serif"],
+        sans: ["Hind", "Noto\\ Sans\\ JP","sans-serif"],
         display: ["Lexend\\ Exa", "sans-serif"],
       },
     },
