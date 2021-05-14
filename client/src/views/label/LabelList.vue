@@ -3,10 +3,10 @@
     <div class="py-8">
       <div class="py-2 text-sepia-500">
         <h1 class="text-4xl font-semibold tracking-wider">
-          Authors
+          Labels
         </h1>
         <p class="text-lg">
-          A list of author of authors we currently indexes.
+          A list of label of novels we currently indexes.
         </p>
       </div>
       <div class="container min-w-full">
@@ -29,22 +29,33 @@
                 >
                   Name
                 </th>
+                <th
+                  scope="col"
+                  class="px-5 py-3 bg-sepia-600  border-b border-steel-200 text-steel-500"
+                >
+                  URL
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(author, index) in authors" :key="index">
+              <tr v-for="(label, index) in labels" :key="index">
                 <td
                   class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
                   <div class="font-semibold">
-                    {{ author.name }}
+                    {{ label.name }}
                   </div>
                   <div class="text-sm">
-                    {{ author.jpName }}
+                    {{ label.jpName }}
                   </div>
-                  <router-link :to="'/author/' + author.id" class="text-sm"
+                  <router-link :to="'/label/' + label.id" class="text-sm"
                     >Details</router-link
                   >
+                </td>
+                <td
+                  class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
+                >
+                  {{ label.link }}
                 </td>
               </tr>
             </tbody>
@@ -67,13 +78,13 @@
 </template>
 
 <script>
-import AuthorDataService from "../../../services/AuthorDataService";
+import LabelDataService from "../../services/LabelDataService";
 
 export default {
-  name: "author-list",
+  name: "label-list",
   data() {
     return {
-      authors: [],
+      labels: [],
       searchName: "",
       sortBy: "name",
       ordering: "asc",
@@ -112,7 +123,7 @@ export default {
 
       return params;
     },
-    retrieveAuthor() {
+    retrieveLabel() {
       const params = this.getRequestParams(
         this.searchName,
         this.page,
@@ -123,10 +134,10 @@ export default {
 
       console.log(params);
 
-      AuthorDataService.getAll(params)
+      LabelDataService.getAll(params)
         .then((response) => {
           const pagingData = response.data.data;
-          this.authors = pagingData.result;
+          this.labels = pagingData.result;
           this.totalRows = pagingData.totalItems;
           this.totalPages = pagingData.totalPages;
           console.log(pagingData);
@@ -138,22 +149,22 @@ export default {
 
     handleUpdateParams() {
       this.page = 1;
-      this.retrieveAuthor();
+      this.retrieveLabel();
     },
 
     handlePageChange(value) {
       this.page = value;
-      this.retrieveAuthor();
+      this.retrieveLabel();
     },
 
     handlePageSizeChange(event) {
       this.pageSize = event.target.value;
       this.page = 1;
-      this.retrieveAuthor;
+      this.retrieveLabel;
     },
   },
   mounted() {
-    this.retrieveAuthor();
+    this.retrieveLabel();
   },
 };
 </script>

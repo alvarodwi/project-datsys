@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import IllustratorDataService from "../../../services/IllustratorDataService";
+import IllustratorDataService from "../../services/IllustratorDataService";
 
 export default {
   name: "illustrator-list",

@@ -1,21 +1,42 @@
 <template>
   <div class="container mx-auto px-4 sm:px-8 max-w-8xl rounded-lg">
     <div class="py-8">
-      <div class="py-2 text-sepia-500">
-        <h1 class="text-4xl font-semibold tracking-wider">
-          Novels
-        </h1>
-        <p class="text-lg">
-          A list of novels we currently indexes.
-        </p>
+      <div class="flex w-full">
+        <div class="py-2 text-sepia-500 flex flex-col w-4/5">
+          <h1 class="text-4xl font-semibold tracking-wider">
+            Novels
+          </h1>
+          <p class="text-lg">
+            A list of novels we currently indexes.
+          </p>
+        </div>
+        <div class="flex flex-row-reverse w-1/5">
+          <button
+            class="self-end py-2 px-4 m-4 bg-steel-600 hover:bg-steel-700 focus:ring-steel-500 focus:ring-offset-steel-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+            @click="$router.push('novel-add')"
+          >
+            Add Novel
+          </button>
+        </div>
       </div>
-      <div class="container min-w-full">
+      <div class="container w-full">
         <input
           type="text"
           class="rounded-lg border-transparent flex-1 appearance-none border border-steel-500 w-full py-2 px-4 bg-sepia-500 text-steel-700 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-steel-600 focus:border-transparent"
           placeholder="search title..."
           v-model="searchTitle"
           v-on:change="handleUpdateParams"
+        />
+      </div>
+      <div class="container w-full">
+        <sort-button
+          :options="['title', 'last_release', 'total_volume']"
+          :default="'title'"
+          @input="
+            sortBy = $event.sort;
+            ordering = $event.direction;
+            handleUpdateParams();
+          "
         />
       </div>
       <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -73,22 +94,28 @@
                 <td
                   class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
-                  {{ novel.author.name }}
+                  {{ !_.isEmpty(novel.author) ? novel.author.name : "-" }}
                 </td>
                 <td
                   class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
-                  {{ novel.illustrator.name }}
+                  {{
+                    !_.isEmpty(novel.illustrator) ? novel.illustrator.name : "-"
+                  }}
                 </td>
                 <td
                   class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
-                  {{ dayjs(novel.lastRelease).format("MMMM DD, YYYY") }}
+                  {{
+                    !_.isEmpty(novel.releases)
+                      ? dayjs(novel.lastRelease).format("MMMM DD, YYYY")
+                      : "-"
+                  }}
                 </td>
                 <td
                   class="py-4 px-8 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
-                  {{ novel.totalVolume }}
+                  {{ !_.isEmpty(novel.releases) ? novel.totalVolume : "-" }}
                 </td>
               </tr>
             </tbody>
@@ -111,11 +138,16 @@
 </template>
 
 <script>
-import NovelDataService from "../../../services/NovelDataService";
+import SortButton from "../../components/base/SortButton.vue";
+import NovelDataService from "../../services/NovelDataService";
 
 export default {
   name: "novel-list",
+  components: {
+    SortButton,
+  },
   data() {
+    SortButton;
     return {
       novels: [],
       searchTitle: "",

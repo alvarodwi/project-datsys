@@ -33,6 +33,7 @@ Vue.use(VueTailwind, settings);
 
 Vue.config.productionTip = false;
 Vue.prototype.dayjs = require("dayjs");
+Vue.prototype._ = require("lodash")
 
 new Vue({
   router,

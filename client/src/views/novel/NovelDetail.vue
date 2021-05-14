@@ -4,7 +4,7 @@
       <ul class="flex cursor-pointer bg-transparent">
         <li>
           <a
-            class="text-sm font-semibold uppercase py-2 px-6 rounded bg-steel-500 leading-normal border-b-2"
+            class="select-none text-sm font-semibold uppercase py-2 px-6 rounded bg-steel-500 leading-normal border-b-2"
             v-on:click="toggleTabs(1)"
             v-bind:class="{
               'text-sepia-500 border-sepia-500': openTab !== 1,
@@ -16,7 +16,7 @@
         </li>
         <li>
           <a
-            class="text-sm font-semibold uppercase py-2 px-6 rounded bg-steel-500 leading-normal border-b-2"
+            class="select-none text-sm font-semibold uppercase py-2 px-6 rounded bg-steel-500 leading-normal border-b-2"
             v-on:click="toggleTabs(2)"
             v-bind:class="{
               'text-sepia-500 border-sepia-500': openTab !== 2,
@@ -38,20 +38,7 @@
               </p>
             </div>
             <div v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }">
-              <p>
-                B
-              </p>
-            </div>
-            <div v-bind:class="{ hidden: openTab !== 3, block: openTab === 3 }">
-              <p>
-                Efficiently unleash cross-media information without cross-media
-                value. Quickly maximize timely deliverables for real-time
-                schemas.
-                <br />
-                <br />
-                Dramatically maintain clicks-and-mortar solutions without
-                functional solutions.
-              </p>
+              <novel-form />
             </div>
           </div>
         </div>
@@ -61,7 +48,10 @@
 </template>
 
 <script>
+import NovelForm from "../../components/crud/novel/NovelForm.vue";
+
 export default {
+  components: { NovelForm },
   name: "novel-detail",
   data() {
     return {

@@ -14,49 +14,49 @@ export default new Router({
     {
       path: "/novel",
       name: "novel",
-      component: () => import("./components/crud/novel/DataTableNovel"),
+      component: () => import("./views/novel/NovelList"),
     },
     {
       path: "/novel/:id",
       name: "novel-detail",
-      component: () => import("./components/crud/novel/NovelDetail"),
+      component: () => import("./views/novel/NovelDetail"),
     },
     {
       path: "/author",
       name: "author",
-      component: () => import("./components/crud/author/DataTableAuthor"),
+      component: () => import("./views/author/AuthorList"),
     },
     {
       path: "/author/:id",
       name: "author-detail",
-      component: () => import("./components/crud/author/AuthorDetail"),
+      component: () => import("./views/author/AuthorDetail"),
     },
     {
       path: "/illustrator",
       name: "illustrator",
       component: () =>
-        import("./components/crud/illustrator/DataTableIllustrator"),
+        import("./views/illustrator/IllustratorList"),
     },
     {
       path: "/illustrator/:id",
       name: "illustrator-detail",
       component: () =>
-        import("./components/crud/illustrator/IllustratorDetail"),
+        import("./views/illustrator/IllustratorDetail"),
     },
     {
       path: "/label",
       name: "label",
-      component: () => import("./components/crud/label/DataTableLabel"),
+      component: () => import("./views/label/LabelList"),
     },
     {
       path: "/label/:id",
       name: "label-detail",
-      component: () => import("./components/crud/label/LabelDetail"),
+      component: () => import("./views/label/LabelDetail"),
     },
     {
       path: "/novel-add",
       name: "novel-add",
-      component: () => import("./components/crud/novel/NovelForm"),
+      component: () => import("./views/novel/NovelCreate"),
     },
     {
       path: "/illustrator-add",
