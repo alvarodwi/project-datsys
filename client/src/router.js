@@ -74,26 +74,6 @@ export default new Router({
       component: () => import("./components/crud/label/LabelForm"),
     },
     {
-      path: "/novel-debug",
-      name: "novel-debug",
-      component: () => import("./components/crud/novel/NovelCard"),
-    },
-    {
-      path: "/author-debug",
-      name: "author-debug",
-      component: () => import("./components/crud/author/AuthorCard"),
-    },
-    {
-      path: "/illustrator-debug",
-      name: "illustrator-debug",
-      component: () => import("./components/crud/illustrator/IllustratorCard"),
-    },
-    {
-      path: "/label-debug",
-      name: "label-debug",
-      component: () => import("./components/crud/label/LabelCard"),
-    },
-    {
       path: "/release/:id",
       name: "release-detail",
       component: () => import("./views/novel/release/ReleaseDetail"),

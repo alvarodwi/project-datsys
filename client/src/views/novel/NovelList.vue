@@ -1,5 +1,23 @@
 <template>
   <div class="container mx-auto px-4 sm:px-8 max-w-8xl rounded-lg">
+    <button
+      class="py-4 px-4 flex justify-center items-center my-4 bg-sepia-500 hover:bg-sepia-700 focus:ring-sepia-500 focus:ring-offset-sepia-200 text-steel-500 w-max transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+      @click="$router.go(-1)"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path
+          d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z"
+          fill="rgba(59,73,84,1)"
+        />
+      </svg>
+      <span class="mx-2">Back</span>
+    </button>
     <div class="py-8">
       <div class="flex w-full">
         <div class="py-2 text-sepia-500 flex flex-col w-4/5">
@@ -12,7 +30,7 @@
         </div>
         <div class="flex flex-row-reverse w-1/5">
           <button
-            class="self-end py-2 px-4 m-4 bg-geyser-600 hover:bg-geyser-700 focus:ring-geyser-500 focus:ring-offset-geyser-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+            class="self-end py-2 px-4 m-4 bg-steel-600 hover:bg-steel-700 focus:ring-steel-500 focus:ring-offset-steel-200 text-sepia-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
             @click="$router.push('novel-add')"
           >
             Add Novel

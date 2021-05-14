@@ -62,6 +62,16 @@ exports.detail = async (req, res) => {
 
   var result = await db.Novel.findOne({
     where: where,
+    attributes: {
+      include: [
+        [
+        sequelize.literal(`(SELECT COUNT(*)
+        FROM releases r
+        WHERE novel.id = r.novelId)`),
+          "totalVolume",
+        ],
+      ],
+    },
     include: {
       all: true,
       nested: true,
