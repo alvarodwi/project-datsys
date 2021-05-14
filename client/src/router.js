@@ -94,6 +94,11 @@ export default new Router({
       component: () => import("./components/crud/label/LabelCard"),
     },
     {
+      path: "/release/:id",
+      name: "release-detail",
+      component: () => import("./views/novel/release/ReleaseDetail"),
+    },
+    {
       path: "/novel/:id/release-add",
       name: "release-add",
       component: () => import("./components/crud/release/ReleaseForm"),
