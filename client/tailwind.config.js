@@ -1,5 +1,3 @@
-const colors = require("tailwindcss/colors");
-
 module.exports = {
   purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
@@ -17,42 +15,6 @@ module.exports = {
           "700": "#bb423d",
           "800": "#953531",
           "900": "#7a2b28",
-        },
-        green: {
-          "50": "#f8fef7",
-          "100": "#f1fdf0",
-          "200": "#dcfbd8",
-          "300": "#c7f8c1",
-          "400": "#9df293",
-          "500": "#73ED64",
-          "600": "#68d55a",
-          "700": "#56b24b",
-          "800": "#458e3c",
-          "900": "#387431",
-        },
-        yellow: {
-          "50": "#fffdf6",
-          "100": "#fffced",
-          "200": "#fff7d2",
-          "300": "#fff2b7",
-          "400": "#ffe880",
-          "500": "#FFDE4A",
-          "600": "#e6c843",
-          "700": "#bfa738",
-          "800": "#99852c",
-          "900": "#7d6d24",
-        },
-        blue: {
-          "50": "#f8fdff",
-          "100": "#f2fcfe",
-          "200": "#def7fd",
-          "300": "#c9f2fb",
-          "400": "#a1e8f9",
-          "500": "#79DEF6",
-          "600": "#6dc8dd",
-          "700": "#5ba7b9",
-          "800": "#498594",
-          "900": "#3b6d79",
         },
         geyser: {
           "50": "#fdfdfe",
@@ -114,6 +76,7 @@ module.exports = {
       backgroundColor: ["active"],
       opacity: ["disabled"],
       cursor: ["disabled"],
+      transform: ['hover', 'focus'],
     },
   },
   plugins: [

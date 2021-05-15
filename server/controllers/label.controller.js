@@ -1,11 +1,14 @@
 const { Op } = require("sequelize");
+const { sequelize } = require("../models/");
 const db = require("../models");
 const { response, getPagination, getPagingData } = require("../utils/helpers");
 
 const handleSorting = (sortBy, order) => {
   order = order ? order : "asc";
 
-  if (sortBy == "name") {
+  if (sortBy == "novel_count") {
+    return [sequelize.literal("novelCount"), `${order}`],["name", `${order}`];
+  }else{
     return ["name", `${order}`];
   }
 };
@@ -18,6 +21,16 @@ exports.get = async (req, res) => {
   const { limit, offset } = getPagination(page, size);
 
   var data = await db.Label.findAndCountAll({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(`(SELECT COUNT(*)
+        FROM novels n
+        WHERE label.id = n.labelId)`),
+          "novelCount",
+        ],
+      ],
+    },
     where: condition,
     limit: limit,
     order: sort,

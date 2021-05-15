@@ -88,6 +88,7 @@
 <script>
 import { mixin as clickaway } from "vue-clickaway";
 export default {
+  name: "sort-button",
   mixins: [clickaway],
   props: {
     options: {

@@ -6,7 +6,7 @@
     <div class="flex flex-wrap">
       <div class="my-4 w-3/4 mx-auto ">
         <div class="px-4 py-5 flex-auto bg-sepia-500 rounded-lg">
-          <novel-form />
+          <release-form />
         </div>
       </div>
     </div>
@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import NovelForm from "../../components/crud/novel/NovelForm.vue";
+import ReleaseForm from "../../components/crud/release/ReleaseForm.vue";
 
 export default {
-  components: { NovelForm },
-  name: "novel-create",
+  components: { ReleaseForm },
+  name: "release-create",
 };
 </script>

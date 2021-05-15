@@ -6,12 +6,12 @@ const { response, getPagination, getPagingData } = require("../utils/helpers");
 const handleSorting = (sortBy, order) => {
   order = order ? order : "asc";
 
-  if (sortBy == "title") {
-    return ["title", `${order}`];
-  } else if (sortBy == "total_volume") {
-    return [sequelize.literal("totalVolume"), `${order}`];
+  if (sortBy == "volume_count") {
+    return [sequelize.literal("volumeCount"), `${order}`],["title", `${order}`];
   } else if (sortBy == "last_release") {
-    return [sequelize.literal("lastRelease"), `${order}`];
+    return [sequelize.literal("lastRelease"), `${order}`],["title", `${order}`];
+  }else{
+    return ["title", `${order}`];
   }
 };
 
@@ -29,13 +29,21 @@ exports.get = async (req, res) => {
           sequelize.literal(`(SELECT COUNT(*)
         FROM releases r
         WHERE novel.id = r.novelId)`),
-          "totalVolume",
+          "volumeCount",
         ],
         [
           sequelize.literal(`(SELECT MAX(r.date)
         FROM releases r
         WHERE novel.id = r.novelId)`),
           "lastRelease",
+        ],
+        [
+          sequelize.literal(`(SELECT r.coverUrl 
+        FROM releases r
+        WHERE novel.id = r.novelId 
+        ORDER BY r.volumeNumber ASC
+        LIMIT 1)`),
+          "coverUrl",
         ],
       ],
     },

@@ -1,0 +1,29 @@
+/* hind-regular - latin */
+@font-face {
+  font-family: "Hind";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: local(""), url("/fonts/hind-regular.woff2") format("woff2");
+  /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* lexend-exa-regular - latin */
+@font-face {
+  font-family: "Lexend Exa";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: local(""), url("../fonts/lexend-exa-regular.woff2") format("woff2");
+  /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* noto-sans-jp-regular - latin */
+@font-face {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: local(""), url("/fonts/noto-sans-jp-regular.woff2") format("woff2");
+  /* Chrome 26+, Opera 23+, Firefox 39+ */
+}

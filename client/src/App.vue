@@ -6,30 +6,35 @@
           <div class="font-sans">
             <router-link
               to="/"
+              replace
               class="inline-block text-sm md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Home
             </router-link>
             <router-link
               to="/novel"
+              replace
               class="inline-block text-sm md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Novel
             </router-link>
             <router-link
               to="/author"
+              replace
               class="inline-block text-sm md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Author
             </router-link>
             <router-link
               to="/illustrator"
+              replace
               class="inline-block text-sm md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Illustrator
             </router-link>
             <router-link
               to="/label"
+              replace
               class="inline-block text-sm md:text-lg text-center px-4 py-2 leading-none rounded text-sepia-500 border-sepia-500 hover:border-transparent hover:text-steel-500 hover:bg-sepia-500"
             >
               Label
