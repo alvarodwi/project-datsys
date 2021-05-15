@@ -23,6 +23,18 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Tsukikage",
+          jpName: "槻影",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Rui Tsukiyo",
+          jpName: "月夜涙",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

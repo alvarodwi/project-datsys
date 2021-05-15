@@ -8,7 +8,7 @@
           alt="release-cover"
         />
       </div>
-      <div class="p-4">
+      <div class="p-4 w-full md:w-1/3">
         <h1
           class="text-steel-500 font-semibold text-2xl md:text-4xl tracking-wide"
         >

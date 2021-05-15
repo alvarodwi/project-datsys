@@ -26,6 +26,20 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Famitsu Bunko",
+          jpName: "ファミ通文庫",
+          link: "http://www.enterbrain.co.jp/fb/",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Kadokawa Sneaker Bunko",
+          jpName: "角川スニーカー文庫",
+          link: "http://www.sneakerbunko.jp/",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
