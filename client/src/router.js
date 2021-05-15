@@ -77,7 +77,7 @@ export default new Router({
       component: () => import("./views/novel/release/ReleaseDetail"),
     },
     {
-      path: "/novel/:id/release-add",
+      path: "/novel/:novelId/release-add",
       name: "release-add",
       component: () => import("./views/novel/release/ReleaseCreate"),
     },

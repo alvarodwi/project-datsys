@@ -22,14 +22,16 @@
           Author
         </h2>
         <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-          {{ novel.author.name }}
+          {{ !_.isEmpty(novel.author) ? novel.author.name : "unknown" }}
         </p>
 
         <h2 class="text-steel-500 font-semibold text-2xl tracking-wide">
           Illustrator
         </h2>
         <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-          {{ novel.illustrator.name }}
+          {{
+            !_.isEmpty(novel.illustrator) ? novel.illustrator.name : "unknown"
+          }}
         </p>
 
         <h2 class="text-steel-500 font-semibold text-2xl tracking-wide">
@@ -52,7 +54,7 @@
         Label
       </h2>
       <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-        {{ novel.label.name }}
+        {{ !_.isEmpty(novel.label) ? novel.label.name : "unknown" }}
       </p>
 
       <h2 class="text-steel-500 font-semibold text-2xl tracking-wide">

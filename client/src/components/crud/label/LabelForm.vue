@@ -113,6 +113,7 @@ export default {
       var data = {
         name: this.label.name,
         jpName: this.label.jpName,
+        link: this.label.link,
       };
 
       if (this.$route.params.id) {

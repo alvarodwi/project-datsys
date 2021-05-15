@@ -18,17 +18,6 @@
         </button>
       </div>
     </div>
-    <div class="form-group mt-4">
-      <label for="date">Date</label>
-      <input
-        class="rounded-lg border-transparent flex-1 appearance-none border border-steel-300 w-full py-2 px-4 bg-gray-300 text-steel-500 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
-        id="date"
-        type="date"
-        required
-        v-model="release.date"
-        name="date"
-      />
-    </div>
     <div v-if="!submitted">
       <div class="my-8">
         <label for="volumeNumber" class="text-steel-500">Volume Number</label>
@@ -41,7 +30,17 @@
           name="VolumeNumber"
         />
       </div>
-
+      <div class="form-group mt-4">
+        <label for="date">Date</label>
+        <input
+          class="rounded-lg border-transparent flex-1 appearance-none border border-steel-300 w-full py-2 px-4 bg-gray-300 text-steel-500 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+          id="date"
+          type="date"
+          required
+          v-model="release.date"
+          name="date"
+        />
+      </div>
       <div class="my-8">
         <label for="page">Page Count</label>
         <input
@@ -105,24 +104,22 @@ export default {
   name: "release-form",
   data() {
     return {
-      release: {
-        id: null,
-        volumeNumber: "",
-        page: "",
-        plot: "",
-        storeUrl: "",
-        link: "",
-        authorId: 0,
-        illustratorId: 0,
-        labelId: 0,
-      },
+      release: {},
       submitted: false,
     };
   },
   methods: {
     init() {
-      this.release = {};
-      this.getRelease(this.$route.params.id);
+      this.release = {
+        id: null,
+        volumeNumber: "",
+        date: "",
+        page: "",
+        storeUrl: "",
+        coverUrl: "",
+        novelId: this.$route.params.novelId,
+      };
+      if (this.$route.params.id) this.getRelease(this.$route.params.id);
       this.submitted = false;
     },
     getRelease(id) {
@@ -142,12 +139,10 @@ export default {
       var data = {
         volumeNumber: this.release.volumeNumber,
         page: this.release.page,
-        plot: this.release.plot,
+        date: this.release.date,
+        coverUrl: this.release.coverUrl,
         storeUrl: this.release.storeUrl,
-        link: this.release.link,
-        authorId: this.release.authorId,
-        illustratorId: this.release.illustratorId,
-        labelId: this.release.labelId,
+        novelId: this.release.novelId,
       };
 
       if (this.$route.params.id) {

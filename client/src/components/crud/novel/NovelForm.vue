@@ -63,6 +63,53 @@
           name="genre"
         />
       </div>
+      <div class="form-group mt-4">
+        <label for="authorId">Author</label>
+        <t-rich-select
+          :fetch-options="fetchAuthors"
+          :placeholder="
+            _.isEmpty(novel.author) ? 'select an option' : novel.author.name
+          "
+          value-attribute="id"
+          text-attribute="name"
+          :minimum-input-length="1"
+          v-model="novel.authorId"
+          name="authorId"
+          id="authorId"
+        />
+      </div>
+      <div class="form-group mt-4">
+        <label for="illustratorId">Illustrator</label>
+        <t-rich-select
+          :fetch-options="fetchIllustrators"
+          :placeholder="
+            _.isEmpty(novel.illustrator)
+              ? 'select an option'
+              : novel.illustrator.name
+          "
+          value-attribute="id"
+          text-attribute="name"
+          :minimum-input-length="1"
+          v-model="novel.illustratorId"
+          name="illustratorId"
+          id="illustratorId"
+        />
+      </div>
+      <div class="form-group mt-4">
+        <label for="labelId">Label</label>
+        <t-rich-select
+          :fetch-options="fetchLabels"
+          :placeholder="
+            _.isEmpty(novel.label) ? 'select an option' : novel.label.name
+          "
+          value-attribute="id"
+          text-attribute="name"
+          :minimum-input-length="1"
+          v-model="novel.labelId"
+          name="labelId"
+          id="labelId"
+        />
+      </div>
       <div class="flex w-full">
         <div class="ml-auto">
           <button
@@ -103,16 +150,23 @@ export default {
         plot: "",
         genre: "",
         link: "",
-        authorId: 0,
-        illustratorId: 0,
-        labelId: 0,
       },
       submitted: false,
     };
   },
   methods: {
     init() {
-      this.novel = {};
+      this.novel = {
+        id: null,
+        title: "",
+        jpTitle: "",
+        plot: "",
+        genre: "",
+        link: "",
+        authorId: 0,
+        illustratorId: 0,
+        labelId: 0,
+      };
       this.getNovel(this.$route.params.id);
       this.submitted = false;
     },
@@ -168,6 +222,21 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+    },
+    fetchAuthors(q) {
+      return fetch(`http://localhost:8090/api/author?name=${q}`)
+        .then((response) => response.json())
+        .then((data) => ({ results: data.data.result }));
+    },
+    fetchIllustrators(q) {
+      return fetch(`http://localhost:8090/api/illustrator?name=${q}`)
+        .then((response) => response.json())
+        .then((data) => ({ results: data.data.result }));
+    },
+    fetchLabels(q) {
+      return fetch(`http://localhost:8090/api/label?name=${q}`)
+        .then((response) => response.json())
+        .then((data) => ({ results: data.data.result }));
     },
   },
   mounted() {

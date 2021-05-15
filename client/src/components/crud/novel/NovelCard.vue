@@ -8,7 +8,10 @@
     <div class="card-content">
       <h2 class="card-title">{{ novel.title }}</h2>
       <p id="info">{{ novel.jpTitle }}<br /><br /></p>
-      <p id="info">
+      <p
+        id="info"
+        v-if="!_.isEmpty(novel.author) && !_.isEmpty(novel.illustrator)"
+      >
         by
         <router-link :to="'/author/' + novel.author.id"
           ><span class="text-2xl">{{ novel.author.name }}</span></router-link
@@ -21,13 +24,13 @@
           }}</span></router-link
         >
       </p>
-      <p id="info">
+      <p id="info" v-if="!_.isEmpty(novel.label)">
         published on
         <router-link :to="'/label/' + novel.label.id">
           <span class="text-2xl">{{ novel.label.name }}</span>
         </router-link>
       </p>
-      <div id="datevol">
+      <div id="datevol" v-if="!_.isEmpty(novel.releases)">
         <p class="card-date">
           last released on
           {{ dayjs(novel.lastRelease).format("MMMM DD, YYYY") }}
