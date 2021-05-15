@@ -124,7 +124,7 @@ export default {
       page: 1,
       totalRows: 0,
       totalPages: 0,
-      pageSize: 10,
+      pageSize: 5,
 
       pageSizes: [5, 10, 20],
     };

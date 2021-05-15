@@ -84,7 +84,7 @@
           @click="
             $router.push({
               name: 'release-add',
-              params: { id: $route.params.id },
+              params: { novelId: $route.params.id },
             })
           "
         >
