@@ -187,13 +187,31 @@ a {
 
   .card-title {
     width: auto;
-    margin: auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:auto;
+    margin-top: -40px;
     font-size: 1.5em;
   }
 
   .card-image {
     width: 90%;
     margin: 32px auto;
+  }
+
+  .card-content {
+    transform: translateY(0);
+    transition: transform 500ms ease;
+  }
+
+  .card:focus-within .card-content {
+    transition-duration: 0ms;
+  }
+
+  .card:hover .card-content,
+  .card:focus-within .card-content {
+    transform: translateY(0);
+    transition-delay: 500ms;
   }
 
   #datevol {

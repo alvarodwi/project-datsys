@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="w-full mx-auto p-4 flex flex-col md:flex-row bg-sepia-500 rounded-lg">
+    <div
+      class="w-full mx-auto p-4 flex flex-col md:flex-row bg-sepia-500 rounded-lg"
+    >
       <div class="flex-1 mt-auto mb-4 md:mb-auto">
         <p class="text-steel-500 font-semibold text-4xl">Name</p>
         <p class="text-steel-500 text-xl">JP Name</p>
@@ -18,11 +20,11 @@
           <h1
             class="mr-auto text-steel-500 font-semibold text-2xl md:text-4xl tracking-wide"
           >
-            Releases
+            Series
           </h1>
           <div class="mr-0 md:mr-32 px-4 py-2 w-max rounded-lg bg-sepia-600">
             <p class="text-steel-500 text-sm md:text-lg font-semibold">
-              {{ novel.totalVolume }} volumes
+              {{ novel.totalVolume }} series
             </p>
           </div>
         </div>
@@ -35,7 +37,7 @@
             })
           "
         >
-          Add Release
+          Add Series
         </button>
       </div>
     </div>
@@ -68,7 +70,7 @@
 </template>
 
 <script>
-import NovelDataService from "../../../services/NovelDataService";
+import NovelDataService from "../../../services/IllustratorDataService";
 
 export default {
   name: "novel-form",

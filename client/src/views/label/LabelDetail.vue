@@ -56,16 +56,12 @@
               <div
                 v-bind:class="{ hidden: openTab !== 1, block: openTab === 1 }"
               >
-                <p>
-                  A
-                </p>
+                <label-detail-card />
               </div>
               <div
                 v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
               >
-                <p>
-                  B
-                </p>
+                <label-form />
               </div>
             </div>
           </div>
@@ -76,7 +72,11 @@
 </template>
 
 <script>
+import LabelForm from "../../components/crud/label/LabelForm.vue";
+import LabelDetailCard from "../../components/crud/label/LabelDetailCard.vue";
+
 export default {
+  components: { LabelForm, LabelDetailCard },
   name: "novel-detail",
   data() {
     return {

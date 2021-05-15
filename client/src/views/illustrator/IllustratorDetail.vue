@@ -56,16 +56,12 @@
               <div
                 v-bind:class="{ hidden: openTab !== 1, block: openTab === 1 }"
               >
-                <p>
-                  A
-                </p>
+                <illustrator-detail-card />
               </div>
               <div
                 v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
               >
-                <p>
-                  B
-                </p>
+                <illustrator-form />
               </div>
             </div>
           </div>
@@ -76,8 +72,12 @@
 </template>
 
 <script>
+import IllustratorForm from "../../components/crud/illustrator/IllustratorForm.vue";
+import IllustratorDetailCard from "../../components/crud/illustrator/IllustratorDetailCard.vue";
+
 export default {
-  name: "novel-detail",
+  components: { IllustratorForm, IllustratorDetailCard },
+  name: "illustrator-detail",
   data() {
     return {
       openTab: 1,
