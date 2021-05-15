@@ -1,6 +1,10 @@
 <template>
   <router-link class="card" :to="'/novel/' + novel.id">
-    <img class="card-image" :src="novel.releases[0].coverUrl" alt="adachi" />
+    <img
+      class="card-image rounded-lg shadow-lg"
+      :src="novel.coverUrl"
+      alt="adachi"
+    />
     <div class="card-content">
       <h2 class="card-title">{{ novel.title }}</h2>
       <p id="info">{{ novel.jpTitle }}<br /><br /></p>

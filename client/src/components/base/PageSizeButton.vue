@@ -80,7 +80,7 @@ export default {
       required: true,
     },
     default: {
-      type: String,
+      type: Number,
       required: false,
       default: null,
     },

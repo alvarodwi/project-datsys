@@ -34,14 +34,12 @@ export default new Router({
     {
       path: "/illustrator",
       name: "illustrator",
-      component: () =>
-        import("./views/illustrator/IllustratorList"),
+      component: () => import("./views/illustrator/IllustratorList"),
     },
     {
       path: "/illustrator/:id",
       name: "illustrator-detail",
-      component: () =>
-        import("./views/illustrator/IllustratorDetail"),
+      component: () => import("./views/illustrator/IllustratorDetail"),
     },
     {
       path: "/label",
@@ -61,17 +59,17 @@ export default new Router({
     {
       path: "/illustrator-add",
       name: "illustrator-add",
-      component: () => import("./components/crud/illustrator/IllustratorForm"),
+      component: () => import("./views/illustrator/IllustratorCreate"),
     },
     {
       path: "/author-add",
       name: "author-add",
-      component: () => import("./components/crud/author/AuthorForm"),
+      component: () => import("./views/author/AuthorCreate"),
     },
     {
       path: "/label-add",
       name: "label-add",
-      component: () => import("./components/crud/label/LabelForm"),
+      component: () => import("./views/label/LabelCreate"),
     },
     {
       path: "/release/:id",
@@ -81,7 +79,7 @@ export default new Router({
     {
       path: "/novel/:id/release-add",
       name: "release-add",
-      component: () => import("./components/crud/release/ReleaseForm"),
+      component: () => import("./views/novel/release/ReleaseCreate"),
     },
   ],
 });

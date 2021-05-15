@@ -7,10 +7,14 @@ const handleSorting = (sortBy, order) => {
   order = order ? order : "asc";
 
   if (sortBy == "volume_count") {
-    return [sequelize.literal("volumeCount"), `${order}`],["title", `${order}`];
+    return (
+      [sequelize.literal("volumeCount"), `${order}`], ["title", `${order}`]
+    );
   } else if (sortBy == "last_release") {
-    return [sequelize.literal("lastRelease"), `${order}`],["title", `${order}`];
-  }else{
+    return (
+      [sequelize.literal("lastRelease"), `${order}`], ["title", `${order}`]
+    );
+  } else {
     return ["title", `${order}`];
   }
 };
@@ -26,23 +30,21 @@ exports.get = async (req, res) => {
     attributes: {
       include: [
         [
-          sequelize.literal(`(SELECT COUNT(*)
-        FROM releases r
-        WHERE novel.id = r.novelId)`),
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`
+          ),
           "volumeCount",
         ],
         [
-          sequelize.literal(`(SELECT MAX(r.date)
-        FROM releases r
-        WHERE novel.id = r.novelId)`),
+          sequelize.literal(
+            `(SELECT MAX(r.date) FROM releases r WHERE novel.id = r.novelId)`
+          ),
           "lastRelease",
         ],
         [
-          sequelize.literal(`(SELECT r.coverUrl 
-        FROM releases r
-        WHERE novel.id = r.novelId 
-        ORDER BY r.volumeNumber ASC
-        LIMIT 1)`),
+          sequelize.literal(
+            `(SELECT r.coverUrl FROM releases r WHERE novel.id = r.novelId ORDER BY r.volumeNumber ASC LIMIT 1)`
+          ),
           "coverUrl",
         ],
       ],
@@ -73,10 +75,16 @@ exports.detail = async (req, res) => {
     attributes: {
       include: [
         [
-        sequelize.literal(`(SELECT COUNT(*)
-        FROM releases r
-        WHERE novel.id = r.novelId)`),
-          "totalVolume",
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`
+          ),
+          "volumeCount",
+        ],
+        [
+          sequelize.literal(
+            `(SELECT r.coverUrl FROM releases r WHERE novel.id = r.novelId ORDER BY r.volumeNumber ASC LIMIT 1)`
+          ),
+          "coverUrl",
         ],
       ],
     },

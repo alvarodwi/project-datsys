@@ -4,62 +4,48 @@
       class="w-full mx-auto p-4 flex flex-col md:flex-row bg-sepia-500 rounded-lg"
     >
       <div class="flex-1 mt-auto mb-4 md:mb-auto">
-        <p class="text-steel-500 font-semibold text-4xl">Name</p>
-        <p class="text-steel-500 text-xl">JP Name</p>
-        <p class="mt-4 text-steel-500 font-semibold text-4xl">URL</p>
-      <p class="text-steel-500 text-xl">insert URL</p>
-      </div>
-      <div class="mt-auto mb-auto">
-        <div class="bg-sepia-600 w-max rounded p-2 mt-auto mb-auto">
-          <p class="text-steel-500 font-semibold text-xl">9 Series</p>
-        </div>
+        <p class="text-steel-500 font-semibold text-4xl">{{ label.name }}</p>
+        <p class="text-steel-500 text-xl">{{ label.jpName }}</p>
+        <p class="mt-4 text-steel-500 font-semibold text-2xl">URL</p>
+        <p class="text-steel-500 text-xl">
+          <a :href="label.link">{{ label.link }}</a>
+        </p>
       </div>
     </div>
-    <div class="bg-gray-500 w-auto h-8 -mx-4 mt-4 md:mt-0"></div>
+    <div class="bg-gray-500 w-auto h-8 -mx-4"></div>
     <div>
       <div class="w-full mt-8 p-4 flex flex-col md:flex-row">
-        <div class="w-full md:w-1/2 flex flex-row">
+        <div class="w-full flex flex-row">
           <h1
             class="mr-auto text-steel-500 font-semibold text-2xl md:text-4xl tracking-wide"
           >
-            Series
+            Works
           </h1>
-          <div class="mr-0 md:mr-32 px-4 py-2 w-max rounded-lg bg-sepia-600">
+          <div class="ml-0 px-4 py-2 w-max rounded-lg bg-sepia-600">
             <p class="text-steel-500 text-sm md:text-lg font-semibold">
-              {{ novel.totalVolume }} series
+              {{ label.novelCount }} novels
             </p>
           </div>
         </div>
-        <button
-          class="ml-auto py-2 px-4 bg-geyser-600 hover:bg-geyser-700 focus:ring-geyser-500 focus:ring-offset-geyser-200 text-steel-500 w-full md:w-max transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mt-4 md:mt-0"
-          @click="
-            $router.push({
-              name: 'release-add',
-              params: { id: $route.params.id },
-            })
-          "
-        >
-          Add Series
-        </button>
       </div>
     </div>
     <div
-      class="w-full mt-8 p-4 flex flex-col md:flex-row flex-wrap place-content-center"
+      class="w-full mt-4 p-4 flex flex-col md:flex-row flex-wrap place-content-center"
     >
       <div
-        v-for="(release, index) in novel.releases"
+        v-for="(novel, index) in label.novels"
         :key="index"
-        class="flex flex-col w-full md:w-1/6 m-4"
+        class="flex flex-col w-full md:w-1/5 m-4"
       >
         <img
-          class="w-full h-auto"
-          src="../../../assets/img/adachi.jpeg"
-          alt="adachi"
+          class="w-full h-auto rounded-lg"
+          :src="novel.releases[0].coverUrl"
+          alt="novel-cover"
         />
         <button
           class="self-center py-2 px-4 bg-steel-600 hover:bg-steel-700 focus:ring-steel-500 focus:ring-offset-steel-200 w-full md:w-max transition ease-in duration-200 text-center shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full mt-4"
           @click="
-            $router.push({ name: 'release-detail', params: { id: release.id } })
+            $router.push({ name: 'novel-detail', params: { id: novel.id } })
           "
         >
           <p class="text-sepia-500 text-sm md:text-lg">
@@ -72,20 +58,20 @@
 </template>
 
 <script>
-import NovelDataService from "../../../services/IllustratorDataService";
+import LabelDataService from "../../../services/LabelDataService";
 
 export default {
-  name: "novel-form",
+  name: "label-detail-card",
   data() {
     return {
-      novel: {},
+      label: {},
     };
   },
   methods: {
-    getNovel(id) {
-      NovelDataService.get(id)
+    getLabel(id) {
+      LabelDataService.get(id)
         .then((response) => {
-          this.novel = response.data.data;
+          this.label = response.data.data;
           console.log(response.data);
         })
         .catch((e) => {
@@ -94,7 +80,7 @@ export default {
     },
   },
   mounted() {
-    this.getNovel(this.$route.params.id);
+    this.getLabel(this.$route.params.id);
   },
 };
 </script>

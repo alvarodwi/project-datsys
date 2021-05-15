@@ -8,7 +8,7 @@
       </div>
       <div class="ml-auto" :class="{ hidden: !$route.params.id }">
         <button
-          class="self-end py-2 px-4 mt-4 bg-steel-600 hover:bg-steel-700 focus:ring-steel-500 focus:ring-offset-steel-200 text-sepia-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
+          class="self-end py-2 px-4 mt-4 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-sepia-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
           @click="
             deleteRelease();
             $router.go(-1);
@@ -19,16 +19,16 @@
       </div>
     </div>
     <div class="form-group mt-4">
-        <label for="date">Date</label>
-        <input
-          class="rounded-lg border-transparent flex-1 appearance-none border border-steel-300 w-full py-2 px-4 bg-gray-300 text-steel-500 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
-          id="date"
-          type = "date"
-          required
-          v-model="release.date"
-          name="date"
-        />
-      </div>
+      <label for="date">Date</label>
+      <input
+        class="rounded-lg border-transparent flex-1 appearance-none border border-steel-300 w-full py-2 px-4 bg-gray-300 text-steel-500 placeholder-steel-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+        id="date"
+        type="date"
+        required
+        v-model="release.date"
+        name="date"
+      />
+    </div>
     <div v-if="!submitted">
       <div class="my-8">
         <label for="volumeNumber" class="text-steel-500">Volume Number</label>
@@ -129,6 +129,9 @@ export default {
       ReleaseDataService.get(id)
         .then((response) => {
           this.release = response.data.data;
+          this.release.date = this.dayjs(this.release.date).format(
+            "YYYY-MM-DD"
+          );
           console.log(response.data);
         })
         .catch((e) => {

@@ -7,8 +7,8 @@ const handleSorting = (sortBy, order) => {
   order = order ? order : "asc";
 
   if (sortBy == "novel_count") {
-    return [sequelize.literal("novelCount"), `${order}`],["name", `${order}`];
-  }else{
+    return [sequelize.literal("novelCount"), `${order}`], ["name", `${order}`];
+  } else {
     return ["name", `${order}`];
   }
 };
@@ -24,9 +24,9 @@ exports.get = async (req, res) => {
     attributes: {
       include: [
         [
-          sequelize.literal(`(SELECT COUNT(*)
-        FROM novels n
-        WHERE illustrator.id = n.illustratorId)`),
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM novels n WHERE illustrator.id = n.illustratorId)`
+          ),
           "novelCount",
         ],
       ],
@@ -53,11 +53,30 @@ exports.detail = async (req, res) => {
   };
 
   var result = await db.Illustrator.findOne({
-    where: where,
-    include: {
-      all: true,
-      nested: true,
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM novels n WHERE illustrator.id = n.illustratorId)`
+          ),
+          "novelCount",
+        ],
+      ],
     },
+    where: where,
+    include: [
+      {
+        model: db.Novel,
+        as: "novels",
+        include: [
+          {
+            model: db.Release,
+            as: "releases",
+            where: { volumeNumber: 1 },
+          },
+        ],
+      },
+    ],
   });
 
   if (!result)

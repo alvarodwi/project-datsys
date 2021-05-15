@@ -15,7 +15,6 @@ exports.get = async (req, res) => {
     include: [
       {
         all: true,
-        nested: true,
       },
     ],
   });
@@ -32,7 +31,6 @@ exports.detail = async (req, res) => {
     where: where,
     include: {
       all: true,
-      nested: true,
     },
   });
 

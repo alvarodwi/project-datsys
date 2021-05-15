@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <div class="w-3/4 mx-auto">
       <back-button />
     </div>

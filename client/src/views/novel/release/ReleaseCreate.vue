@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ReleaseForm from "../../components/crud/release/ReleaseForm.vue";
+import ReleaseForm from "../../../components/crud/release/ReleaseForm.vue";
 
 export default {
   components: { ReleaseForm },

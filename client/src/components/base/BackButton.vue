@@ -25,7 +25,6 @@ export default {
   props: {
     routeName: {
       type: String,
-      required: true,
     },
   },
 };

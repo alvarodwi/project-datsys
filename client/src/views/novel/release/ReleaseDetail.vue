@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="w-3/4 mx-auto">
-      <back-button/>
+      <back-button />
     </div>
     <div class="flex flex-wrap">
       <div class="my-4 w-3/4 mx-auto">
@@ -39,64 +39,7 @@
               <div
                 v-bind:class="{ hidden: openTab !== 1, block: openTab === 1 }"
               >
-                <div class="flex flex-col md:flex-row">
-                  <div class="p-4">
-                    <img
-                      class="w-full h-auto"
-                      src="../../../assets/img/adachi.jpeg"
-                      alt="adachi"
-                    />
-                  </div>
-                  <div class="p-4">
-                    <h1
-                      class="text-steel-500 font-semibold text-2xl md:text-4xl tracking-wide"
-                    >
-                      Adachi to Shimamura
-                    </h1>
-                    <p class="mt-2 text-steel-500 text-base md:text-xl mb-16">
-                      安達としまむら
-                    </p>
-
-                    <h2
-                      class="text-steel-500 font-semibold text-2xl tracking-wide"
-                    >
-                      Volume Number
-                    </h2>
-                    <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-                      1
-                    </p>
-
-                    <h2
-                      class="text-steel-500 font-semibold text-2xl tracking-wide"
-                    >
-                      Release Date
-                    </h2>
-                    <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-                      March, 10 2013
-                    </p>
-
-                    <h2
-                      class="text-steel-500 font-semibold text-2xl tracking-wide"
-                    >
-                      Pages
-                    </h2>
-                    <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-                      248
-                    </p>
-                  </div>
-                </div>
-                <div class="p-4 mb-8">
-                  <h2
-                    class="text-steel-500 font-semibold text-2xl tracking-wide"
-                  >
-                    Online Shops
-                  </h2>
-                  <a
-                    class="mt-4 text-steel-500 text-base md:text-xl mb-8"
-                    href=""
-                    >gawr gura</a
-                  >
-                </div>
+                <release-detail-card />
               </div>
               <div
                 v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
@@ -112,10 +55,10 @@
 </template>
 
 <script>
-import ReleaseForm from "../../../components/crud/release/ReleaseForm";
-
+import ReleaseDetailCard from "../../../components/crud/release/ReleaseDetailCard.vue";
+import ReleaseForm from "../../../components/crud/release/ReleaseForm.vue";
 export default {
-  components: { ReleaseForm },
+  components: { ReleaseForm, ReleaseDetailCard },
   name: "release-detail",
   data() {
     return {
