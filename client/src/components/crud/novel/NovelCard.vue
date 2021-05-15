@@ -1,10 +1,6 @@
 <template>
   <router-link class="card" :to="'/novel/' + novel.id">
-    <img
-      class="card-image rounded-lg shadow-lg"
-      :src="novel.coverUrl"
-      alt="adachi"
-    />
+    <img class="card-image" :src="novel.coverUrl" alt="adachi" />
     <div class="card-content">
       <h2 class="card-title">{{ novel.title }}</h2>
       <p id="info">{{ novel.jpTitle }}<br /><br /></p>
@@ -83,6 +79,7 @@ a {
 }
 
 .card-image {
+  object-fit: contain;
   width: 200px;
   flex: 1;
   margin: 20px 16px;
@@ -92,20 +89,23 @@ a {
 .card-content {
   --padding: 1.5rem;
   width: 70%;
-
   margin: 0;
   padding: 1.5rem;
 }
 
 .card-title {
-  font-size: 2em;
+  white-space: wrap;
+  display: block;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  font-size: 2.5em;
   margin-top: 8px;
   margin-bottom: 20px;
   color: #3b4954;
-  width: max-content;
+  width: 100%;
   position: relative;
   text-align: left;
-  overflow-y: visible;
+  /*overflow: hidden;*/
 }
 
 #datevol {
@@ -195,7 +195,7 @@ a {
   }
 
   .card-title {
-    width: auto;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
@@ -204,7 +204,6 @@ a {
   }
 
   .card-image {
-    width: 90%;
     margin: 32px auto;
   }
 

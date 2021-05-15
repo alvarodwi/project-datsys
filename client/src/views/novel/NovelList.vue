@@ -29,9 +29,9 @@
           v-on:change="handleUpdateParams"
         />
       </div>
-      <div class="container flex">
+      <div class="flex flex-col md:flex-row">
         <SortButton
-          class="w-1/2"
+          class="w-full md:w-1/2"
           :options="['title', 'last_release', 'volume_count']"
           :default="'title'"
           @input="
@@ -41,7 +41,7 @@
           "
         />
         <PageSizeButton
-          class="w-1/2 justify-end"
+          class="w-full md:w-1/2 md:justify-end"
           :options="pageSizes"
           :default="3"
           @input="

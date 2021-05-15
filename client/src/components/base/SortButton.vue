@@ -1,11 +1,11 @@
 <template>
   <div class="flex w-64">
-    <div class="w-2/4 mt-4 relative" v-on-clickaway="closeDropdown">
+    <div class="w-1/2 md:w-1/4 mt-4 relative" v-on-clickaway="closeDropdown">
       <div :class="{ open: open }">
         <button
           type="button"
           @click="open = !open"
-          class="relative w-full bg-sepia-500 border-r border-steel-500 text-steel-500 rounded-l-md shadow-lg pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-grey-500 focus:border-grey-500 sm:text-sm"
+          class="relative w-full bg-sepia-500 border-r border-steel-500 text-steel-500 rounded-l-md shadow-lg pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-grey-500 focus:border-grey-500 md:text-sm"
         >
           <span class="flex items-center">
             <span class="ml-3 block truncate">
