@@ -12,7 +12,9 @@
         <router-link
           class="text-sm"
           :to="'/illustrator/' + novel.illustrator.id"
-          ><span class="text-2xl">{{ novel.illustrator.name }}</span></router-link
+          ><span class="text-2xl">{{
+            novel.illustrator.name
+          }}</span></router-link
         >
       </p>
       <p id="info">
@@ -27,7 +29,7 @@
           {{ dayjs(novel.lastRelease).format("MMMM DD, YYYY") }}
         </p>
         <div class="card-vol">
-          <p id="info">{{ novel.totalVolume }} volumes</p>
+          <p id="info">{{ novel.volumeCount }} volumes</p>
         </div>
       </div>
     </div>
@@ -187,9 +189,9 @@ a {
 
   .card-title {
     width: auto;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
     margin-top: -40px;
     font-size: 1.5em;
   }

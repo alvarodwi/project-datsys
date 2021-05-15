@@ -1,15 +1,29 @@
 <template>
   <div class="flex w-64">
-    <div class="w-2/4 mt-4 relative" v-on-clickaway="closeDropdown">
+    <div class="w-1/4 mt-4 relative" v-on-clickaway="closeDropdown">
       <div :class="{ open: open }">
         <button
           type="button"
           @click="open = !open"
-          class="relative w-full bg-sepia-500 border-r border-steel-500 text-steel-500 rounded-l-md shadow-lg pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-grey-500 focus:border-grey-500 sm:text-sm"
+          class="relative w-full bg-sepia-500 border-r border-steel-500 text-steel-500 rounded-md shadow-lg px-3 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-grey-500 focus:border-grey-500 sm:text-sm"
         >
           <span class="flex items-center">
             <span class="ml-3 block truncate">
               {{ selected }}
+            </span>
+            <span class="ml-auto">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+              >
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path
+                  d="M12 15l-4.243-4.243 1.415-1.414L12 12.172l2.828-2.829 1.415 1.414z"
+                  fill="rgba(59,73,84,1)"
+                />
+              </svg>
             </span>
           </span>
         </button>
@@ -46,36 +60,6 @@
         </div>
       </div>
     </div>
-    <button
-      class="relative w-max bg-sepia-500 border-l border-steel-500 text-steel-500 rounded-r-md shadow-lg pl-3 pr-10 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-grey-500 focus:border-grey-500 sm:text-sm mt-4 mb-1 flex items-center"
-      @click="
-        sortDir = sortDir == 'asc' ? 'desc' : 'asc';
-        emitValue();
-      "
-    >
-      <span :class="{ hidden: sortDir == 'desc' }">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path d="M12 8l6 6H6z" fill="rgba(59,73,84,1)" />
-        </svg>
-      </span>
-      <span :class="{ hidden: sortDir == 'asc' }">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path d="M12 16l-6-6h12z" fill="rgba(59,73,84,1)" />
-        </svg>
-      </span>
-    </button>
   </div>
 </template>
 
@@ -117,7 +101,7 @@ export default {
       this.open = false;
     },
     emitValue() {
-      this.$emit("input", { sort: this.selected, direction: this.sortDir });
+      this.$emit("input", this.selected);
     },
   },
   mounted() {

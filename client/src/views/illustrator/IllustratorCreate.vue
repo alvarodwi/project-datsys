@@ -1,13 +1,12 @@
 <template>
   <div>
-    
     <div class="w-3/4 mx-auto">
       <back-button />
     </div>
     <div class="flex flex-wrap">
       <div class="my-4 w-3/4 mx-auto ">
         <div class="px-4 py-5 flex-auto bg-sepia-500 rounded-lg">
-          <author-form />
+          <illustrator-form />
         </div>
       </div>
     </div>
@@ -15,10 +14,10 @@
 </template>
 
 <script>
-import AuthorForm from "../../components/crud/author/AuthorForm.vue";
+import IllustratorForm from "../../components/crud/illustrator/IllustratorForm.vue";
 
 export default {
-  components: { AuthorForm },
-  name: "author-create",
+  components: { IllustratorForm },
+  name: "illustrator-create",
 };
 </script>

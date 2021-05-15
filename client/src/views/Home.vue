@@ -12,7 +12,11 @@
         <div id="right">
           <img class="gambar" src="../assets/img/ram.jpg" alt="ram" />
           <img class="gambar" src="../assets/img/hyoka.jpg" alt="hyouka" />
-          <img class="gambar" src="../assets/img/dunno.jpg" alt="succubus tryin to be smart" />
+          <img
+            class="gambar"
+            src="../assets/img/dunno.jpg"
+            alt="succubus tryin to be smart"
+          />
           <img class="gambar" src="../assets/img/mogami.jpg" alt="mogami" />
           <img class="gambar" src="../assets/img/poi.jpg" alt="yuudachi" />
           <img class="gambar" src="../assets/img/koakuma.jpg" alt="koakuma" />
@@ -45,7 +49,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1,
 h2,
 p {
