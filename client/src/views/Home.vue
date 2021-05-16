@@ -2,12 +2,12 @@
   <div>
     <section class="w-full">
       <div class="flex flex-col md:flex-row">
-        <div class="w-full md:w-1/2 pt-32 md:pt-64" id="left">
-          <img id="bgimg" src="../assets/img/bgimg.png" alt="bg" />
+        <div class="w-full md:w-1/2 pt-32 md:pt-64 overflow-hidden" id="left">
+          <img class="absolute top-0 w-full md:w-1/2 h-full" id="bgimg" src="../assets/img/bgimg.png" alt="bg" />
           <p class="title" id="datsys">DatSys</p>
           <p class="title" id="project">Project</p>
           <hr id="redline" />
-          <p id="lightnovel">A light Novel Database</p>
+          <p class ="mt-4 ml-8 text-sepia-500 tracking-widest">A light Novel Database</p>
         </div>
         <div class="w-full md:w-1/2">
           <img class="gambar" src="../assets/img/ram.jpg" alt="ram" />
@@ -50,32 +50,10 @@ export default {
 </script>
 
 <style scoped>
-h1,
-h2{
-  font-family: hind;
-  color: #f5e2cf;
-}
-
-p {
-  margin: 0 auto;
-  font-family: Lexend Exa;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 45px;
-}
-
-body {
-  font-family: hind;
-  background-color: #57626b;
-}
 
 #bgimg {
   z-index: -10;
-  position: absolute;
-  width: 50%;
-  height: 100%;
   left: -40px;
-  top: 0;
   opacity: 15%;
 }
 
@@ -103,7 +81,6 @@ body {
 
 #left {
   border-right: 1px solid #fb9a96;
-  overflow: hidden;
 }
 
 .title {
@@ -115,32 +92,19 @@ body {
 }
 
 #datsys {
-  font-family: Lexend Exa;
   margin: 0 0.5em;
   color: #f95851;
 }
 
 #project {
-  font-family: Lexend Exa;
   margin: 0 0.5em;
   color: #f5e2cf;
   margin-bottom: 0.8rem;
 }
 
-#lightnovel {
-  margin-top: 1.5em;
-  padding-bottom: 5em;
-  font-size: 1rem;
-  margin: 0 2.2em;
-}
-
 @media (max-width: 768px) {
   .gambar {
     width: 200%;
-  }
-
-  #bgimg {
-    width: 100%;
   }
 }
 </style>
