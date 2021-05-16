@@ -1,15 +1,15 @@
 <template>
   <div>
-    <section id="home">
-      <div class="split">
-        <div id="left">
+    <section class="w-full">
+      <div class="flex flex-col md:flex-row">
+        <div class="w-full md:w-1/2 pt-32 md:pt-64" id="left">
           <img id="bgimg" src="../assets/img/bgimg.png" alt="bg" />
           <p class="title" id="datsys">DatSys</p>
           <p class="title" id="project">Project</p>
           <hr id="redline" />
           <p id="lightnovel">A light Novel Database</p>
         </div>
-        <div id="right">
+        <div class="w-full md:w-1/2">
           <img class="gambar" src="../assets/img/ram.jpg" alt="ram" />
           <img class="gambar" src="../assets/img/hyoka.jpg" alt="hyouka" />
           <img
@@ -51,8 +51,7 @@ export default {
 
 <style scoped>
 h1,
-h2,
-p {
+h2{
   font-family: hind;
   color: #f5e2cf;
 }
@@ -68,10 +67,6 @@ p {
 body {
   font-family: hind;
   background-color: #57626b;
-}
-
-#home {
-  width: 100%;
 }
 
 #bgimg {
@@ -106,20 +101,9 @@ body {
   }
 }
 
-.split {
-  display: flex;
-  flex-direction: row;
-}
-
 #left {
-  width: 50%;
-  padding-top: 20%;
   border-right: 1px solid #fb9a96;
   overflow: hidden;
-}
-
-#right {
-  width: 50%;
 }
 
 .title {
@@ -153,23 +137,6 @@ body {
 @media (max-width: 768px) {
   .gambar {
     width: 200%;
-  }
-
-  .split {
-    flex-direction: column;
-  }
-
-  .split > * {
-    flex-basis: 100%;
-  }
-
-  #left {
-    width: 100%;
-    padding-top: 20%;
-  }
-
-  #right {
-    width: 100%;
   }
 
   #bgimg {
