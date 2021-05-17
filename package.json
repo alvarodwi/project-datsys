@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Projek UAS Praktikum Sistem Database",
   "scripts": {
+    "install-project": "cd server && npm install && cd ../client && npm install",
     "start-server": "cd server && npm run start",
     "start-client": "cd client && npm run serve"
   },
