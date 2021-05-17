@@ -25,7 +25,7 @@ DB_DATABASE=project_datsys
 
 Pastikan database yang ditulis di dalam `.env` telah ada di dalam mysql.
 
-Selanjutnya, jalankan command berikut di root project
+Selanjutnya, jalankan command berikut di root project untuk inisialisasi struktur database (pastikan database yang ditulis di .env telah ada)
 
 ```
 npm run migrate

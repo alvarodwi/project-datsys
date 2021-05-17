@@ -2,7 +2,7 @@ exports.response = (res, code, message, data) => {
   if (!data) data = {};
 
   if (code != 200) {
-    if (data.length) data = { error: data };
+    if (data.length) data = {error: data};
     else data = {};
 
     return res.status(code).json({
@@ -23,13 +23,13 @@ exports.getPagination = (page, size) => {
   const limit = size ? +size : 10;
   const offset = page ? page * limit : 0;
 
-  return { limit, offset };
+  return {limit, offset};
 };
 
 exports.getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: result } = data;
+  const {count: totalItems, rows: result} = data;
   const currentPage = page ? +page : 0;
   const totalPages = Math.ceil(totalItems / limit);
 
-  return { result, currentPage, totalPages, totalItems };
+  return {result, currentPage, totalPages, totalItems};
 };

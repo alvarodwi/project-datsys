@@ -5,7 +5,7 @@
         <img
           class="mx-auto md:mx-0 w-96 h-auto rounded-lg"
           :src="novel.coverUrl"
-          alt="adachi"
+          :alt="novel.title"
         />
       </div>
       <div class="p-4 w-full md:w-1/3">
@@ -118,7 +118,7 @@
         <img
           class="w-full h-auto rounded-lg"
           :src="release.coverUrl"
-          alt="adachi"
+          :alt="novel.title + ':' + release.volumeNumber"
         />
         <button
           class="self-center py-2 px-4 bg-steel-600 hover:bg-steel-700 focus:ring-steel-500 focus:ring-offset-steel-200 w-full md:w-max transition ease-in duration-200 text-center shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full mt-4"

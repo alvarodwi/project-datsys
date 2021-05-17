@@ -4,8 +4,10 @@
   "description": "Projek UAS Praktikum Sistem Database",
   "scripts": {
     "install-project": "cd server && npm install && cd ../client && npm install",
-    "start-server": "cd server && npm run start",
-    "start-client": "cd client && npm run serve"
+    "start-server": "cd server && npm run dev",
+    "start-client": "cd client && npm run serve",
+    "build": "cd server && gulp && cd ../bin && npm install",
+    "start": "cd bin && npm run start"
   },
   "repository": {
     "type": "git",

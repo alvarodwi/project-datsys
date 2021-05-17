@@ -5,7 +5,7 @@
         <img
           class="mx-auto md:mx-0 w-96 h-auto rounded-lg"
           :src="release.coverUrl"
-          alt="release-cover"
+          :alt="release.novel.title + ':' + release.volumeNumber"
         />
       </div>
       <div class="p-4 w-full md:w-1/3">

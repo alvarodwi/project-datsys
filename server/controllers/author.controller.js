@@ -1,33 +1,33 @@
-const { Op } = require("sequelize");
-const { sequelize } = require("../models/");
-const db = require("../models/");
-const { response, getPagination, getPagingData } = require("../utils/helpers");
+const {Op} = require('sequelize');
+const {sequelize} = require('../models/');
+const db = require('../models/');
+const {response, getPagination, getPagingData} = require('../utils/helpers');
 
 const handleSorting = (sortBy, order) => {
-  order = order ? order : "asc";
+  order = order ? order : 'asc';
 
-  if (sortBy == "novel_count") {
-    return [sequelize.literal("novelCount"), `${order}`], ["name", `${order}`];
+  if (sortBy == 'novel_count') {
+    return [sequelize.literal('novelCount'), `${order}`], ['name', `${order}`];
   } else {
-    return ["name", `${order}`];
+    return ['name', `${order}`];
   }
 };
 
 exports.get = async (req, res) => {
-  const { page, size, name, sort_by, order } = req.query;
-  var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
-  var sort = sort_by ? [handleSorting(sort_by, order)] : [];
+  const {page, size, name, sortBy, order} = req.query;
+  const condition = name ? {name: {[Op.like]: `%${name}%`}} : null;
+  const sort = sortBy ? [handleSorting(sortBy, order)] : [];
 
-  const { limit, offset } = getPagination(page, size);
+  const {limit, offset} = getPagination(page, size);
 
-  var data = await db.Author.findAndCountAll({
+  const data = await db.Author.findAndCountAll({
     attributes: {
       include: [
         [
           sequelize.literal(
-            `(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)`
+              `(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)`,
           ),
-          "novelCount",
+          'novelCount',
         ],
       ],
     },
@@ -44,22 +44,22 @@ exports.get = async (req, res) => {
     ],
   });
 
-  response(res, 200, "success", getPagingData(data, page, limit));
+  response(res, 200, 'success', getPagingData(data, page, limit));
 };
 
 exports.detail = async (req, res) => {
-  var where = {
+  const where = {
     id: req.params.id,
   };
 
-  var result = await db.Author.findOne({
+  const result = await db.Author.findOne({
     attributes: {
       include: [
         [
           sequelize.literal(
-            `(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)`
+              `(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)`,
           ),
-          "novelCount",
+          'novelCount',
         ],
       ],
     },
@@ -67,35 +67,35 @@ exports.detail = async (req, res) => {
     include: [
       {
         model: db.Novel,
-        as: "novels",
+        as: 'novels',
         include: [
           {
             model: db.Release,
-            as: "releases",
-            where: { volumeNumber: 1 },
+            as: 'releases',
+            where: {volumeNumber: 1},
           },
         ],
       },
     ],
   });
 
-  if (!result) return response(res, 404, "Data Author tidak ditemukan", {});
+  if (!result) return response(res, 404, 'Data Author tidak ditemukan', {});
 
-  response(res, 200, "success", result);
+  response(res, 200, 'success', result);
 };
 
 exports.store = async (req, res) => {
-  var result = {};
+  let result = {};
 
   if (req.params.id) {
     result = await db.Author.findOne({
-      where: { id: req.params.id },
-      include: { all: true, nested: true },
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
     });
-    if (!result) return response(res, 404, "Data Author tidak ditemukan", {});
+    if (!result) return response(res, 404, 'Data Author tidak ditemukan', {});
   }
 
-  var data = {
+  const data = {
     name: req.body.name,
     jpName: req.body.jpName,
   };
@@ -107,24 +107,24 @@ exports.store = async (req, res) => {
   }
 
   response(
-    res,
-    200,
-    (!req.params.id ? "Tambah" : "Ubah") + ` data Author berhasil`,
-    await result.toJSON()
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Author berhasil`,
+      await result.toJSON(),
   );
 };
 
 exports.delete = async (req, res) => {
-  var result = await db.Author.findOne({
-    where: { id: req.params.id },
+  const result = await db.Author.findOne({
+    where: {id: req.params.id},
     include: {
       all: true,
       nested: true,
     },
   });
-  if (!result) return response(res, 404, "Data Author tidak ditemukan", {});
+  if (!result) return response(res, 404, 'Data Author tidak ditemukan', {});
 
   await result.destroy();
 
-  return response(res, 200, "Data Author berhasil dihapus", {});
+  return response(res, 200, 'Data Author berhasil dihapus', {});
 };

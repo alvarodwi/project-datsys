@@ -1,1 +1,1209 @@
-(()=>{var e={176:(e,a,t)=>{t(334).config(),e.exports={username:"root",password:"admin",database:"project_datsys",port:{DB_HOST:"localhost",DB_USERNAME:"root",DB_PASSWORD:"admin",DB_DATABASE:"project_datsys"}.DB_PORT,logging:!1,host:"localhost",dialect:"mysql",operatorsAliases:0,timezone:"+07:00"}},591:(e,a,t)=>{const{Op:r}=t(121),{sequelize:i}=t(103),s=t(103),{response:l,getPagination:o,getPagingData:n}=t(741),d=(e,a)=>(a=a||"asc","novel_count"==e?(i.literal("novelCount"),["name",`${a}`]):["name",`${a}`]);a.get=async(e,a)=>{const{page:t,size:u,name:c,sort_by:m,order:p}=e.query;var v=c?{name:{[r.like]:`%${c}%`}}:null,b=m?[d(m,p)]:[];const{limit:h,offset:g}=o(t,u);var w=await s.Author.findAndCountAll({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)"),"novelCount"]]},where:v,limit:h,order:b,offset:g,distinct:!0,include:[{all:!0}]});l(a,200,"success",n(w,t,h))},a.detail=async(e,a)=>{var t={id:e.params.id},r=await s.Author.findOne({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)"),"novelCount"]]},where:t,include:[{model:s.Novel,as:"novels",include:[{model:s.Release,as:"releases",where:{volumeNumber:1}}]}]});if(!r)return l(a,404,"Data Author tidak ditemukan",{});l(a,200,"success",r)},a.store=async(e,a)=>{var t={};if(e.params.id&&!(t=await s.Author.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}})))return l(a,404,"Data Author tidak ditemukan",{});var r={name:e.body.name,jpName:e.body.jpName};e.params.id?await t.update(r):t=await s.Author.create(r),l(a,200,(e.params.id?"Ubah":"Tambah")+" data Author berhasil",await t.toJSON())},a.delete=async(e,a)=>{var t=await s.Author.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}});return t?(await t.destroy(),l(a,200,"Data Author berhasil dihapus",{})):l(a,404,"Data Author tidak ditemukan",{})}},551:(e,a,t)=>{const{Op:r}=t(121),{sequelize:i}=t(103),s=t(103),{response:l,getPagination:o,getPagingData:n}=t(741),d=(e,a)=>(a=a||"asc","novel_count"==e?(i.literal("novelCount"),["name",`${a}`]):["name",`${a}`]);a.get=async(e,a)=>{const{page:t,size:u,name:c,sort_by:m,order:p}=e.query;var v=c?{name:{[r.like]:`%${c}%`}}:null,b=m?[d(m,p)]:[];const{limit:h,offset:g}=o(t,u);var w=await s.Illustrator.findAndCountAll({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM novels n WHERE illustrator.id = n.illustratorId)"),"novelCount"]]},where:v,limit:h,order:b,offset:g,distinct:!0,include:[{all:!0}]});l(a,200,"success",n(w,t,h))},a.detail=async(e,a)=>{var t={id:e.params.id},r=await s.Illustrator.findOne({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM novels n WHERE illustrator.id = n.illustratorId)"),"novelCount"]]},where:t,include:[{model:s.Novel,as:"novels",include:[{model:s.Release,as:"releases",where:{volumeNumber:1}}]}]});if(!r)return l(a,404,"Data Illustrator tidak ditemukan",{});l(a,200,"success",r)},a.store=async(e,a)=>{var t={};if(e.params.id&&!(t=await s.Illustrator.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}})))return l(a,404,"Data Illustrator tidak ditemukan",{});var r={name:e.body.name,jpName:e.body.jpName};e.params.id?await t.update(r):t=await s.Illustrator.create(r),l(a,200,(e.params.id?"Ubah":"Tambah")+" data Illustrator berhasil",await t.toJSON())},a.delete=async(e,a)=>{var t=await s.Illustrator.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}});return t?(await t.destroy(),l(a,200,"Data Illustrator berhasil dihapus",{})):l(a,404,"Data Illustrator tidak ditemukan",{})}},569:(e,a,t)=>{const{Op:r}=t(121),{sequelize:i}=t(103),s=t(103),{response:l,getPagination:o,getPagingData:n}=t(741),d=(e,a)=>(a=a||"asc","novel_count"==e?(i.literal("novelCount"),["name",`${a}`]):["name",`${a}`]);a.get=async(e,a)=>{const{page:t,size:u,name:c,sort_by:m,order:p}=e.query;var v=c?{name:{[r.like]:`%${c}%`}}:null,b=m?[d(m,p)]:[];const{limit:h,offset:g}=o(t,u);var w=await s.Label.findAndCountAll({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM novels n WHERE label.id = n.labelId)"),"novelCount"]]},where:v,limit:h,order:b,offset:g,distinct:!0,include:[{all:!0}]});l(a,200,"success",n(w,t,h))},a.detail=async(e,a)=>{var t={id:e.params.id},r=await s.Label.findOne({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM novels n WHERE label.id = n.labelId)"),"novelCount"]]},where:t,include:[{model:s.Novel,as:"novels",include:[{model:s.Release,as:"releases",where:{volumeNumber:1}}]}]});if(!r)return l(a,404,"Data Label tidak ditemukan",{});l(a,200,"success",r)},a.store=async(e,a)=>{var t={};if(e.params.id&&!(t=await s.Label.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}})))return l(a,404,"Data Label tidak ditemukan",{});var r={name:e.body.name,jpName:e.body.jpName,link:e.body.link};e.params.id?await t.update(r):t=await s.Label.create(r),l(a,200,(e.params.id?"Ubah":"Tambah")+" data Label berhasil",await t.toJSON())},a.delete=async(e,a)=>{var t=await s.Label.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}});return t?(await t.destroy(),l(a,200,"Data Label berhasil dihapus",{})):l(a,404,"Data Label tidak ditemukan",{})}},960:(e,a,t)=>{const{Op:r}=t(121),{sequelize:i}=t(103),s=t(103),{response:l,getPagination:o,getPagingData:n}=t(741),d=(e,a)=>(a=a||"asc","volume_count"==e?(i.literal("volumeCount"),["title",`${a}`]):"last_release"==e?(i.literal("lastRelease"),["title",`${a}`]):["title",`${a}`]);a.get=async(e,a)=>{const{page:t,size:u,title:c,sort_by:m,order:p}=e.query;var v=c?{title:{[r.like]:`%${c}%`}}:null,b=m?[d(m,p)]:[];const{limit:h,offset:g}=o(t,u);var w=await s.Novel.findAndCountAll({attributes:{include:[[i.literal("(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)"),"volumeCount"],[i.literal("(SELECT MAX(r.date) FROM releases r WHERE novel.id = r.novelId)"),"lastRelease"],[i.literal("(SELECT r.coverUrl FROM releases r WHERE novel.id = r.novelId ORDER BY r.volumeNumber ASC LIMIT 1)"),"coverUrl"]]},where:v,order:b,limit:h,offset:g,distinct:!0,include:[{all:!0,nested:!0}]});l(a,200,"success",n(w,t,h))},a.detail=async(e,a)=>{var t={id:e.params.id},r=await s.Novel.findOne({where:t,attributes:{include:[[i.literal("(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)"),"volumeCount"],[i.literal("(SELECT r.coverUrl FROM releases r WHERE novel.id = r.novelId ORDER BY r.volumeNumber ASC LIMIT 1)"),"coverUrl"]]},include:{all:!0,nested:!0}});if(!r)return l(a,404,"Data Novel tidak ditemukan",{});l(a,200,"success",r)},a.store=async(e,a)=>{var t={};if(e.params.id&&!(t=await s.Novel.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}})))return l(a,404,"Data Novel tidak ditemukan",{});var r={title:e.body.title,jpTitle:e.body.jpTitle,plot:e.body.plot,genre:e.body.genre,link:e.body.link,authorId:e.body.authorId,illustratorId:e.body.illustratorId,labelId:e.body.labelId};e.params.id?await t.update(r):t=await s.Novel.create(r),l(a,200,(e.params.id?"Ubah":"Tambah")+" data Novel berhasil",await t.toJSON())},a.delete=async(e,a)=>{var t=await s.Novel.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}});return t?(await t.destroy(),l(a,200,"Data Novel berhasil dihapus",{})):l(a,404,"Data Novel tidak ditemukan",{})}},957:(e,a,t)=>{const{Op:r,where:i}=t(121),s=t(103),{response:l,getPagination:o,getPagingData:n}=t(741);a.get=async(e,a)=>{const{page:t,size:r}=e.query,{limit:d,offset:u}=o(t,r);var c=await s.Release.findAndCountAll({where:i,limit:d,offset:u,distinct:!0,include:[{all:!0}]});l(a,200,"success",n(c,t,d))},a.detail=async(e,a)=>{var t={id:e.params.id},r=await s.Release.findOne({where:t,include:{all:!0}});if(!r)return l(a,404,"Data Release tidak ditemukan",{});l(a,200,"success",r)},a.store=async(e,a)=>{var t={};if(e.params.id&&!(t=await s.Release.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}})))return l(a,404,"Data Release tidak ditemukan",{});var r={volumeNumber:e.body.volumeNumber,date:e.body.date,coverUrl:e.body.coverUrl,page:e.body.page,storeUrl:e.body.storeUrl,novelId:e.body.novelId};e.params.id?await t.update(r):t=await s.Release.create(r),l(a,200,(e.params.id?"Ubah":"Tambah")+" data Release berhasil",await t.toJSON())},a.delete=async(e,a)=>{var t=await s.Release.findOne({where:{id:e.params.id},include:{all:!0,nested:!0}});return t?(await t.destroy(),l(a,200,"Data Release berhasil dihapus",{})):l(a,404,"Data Release tidak ditemukan",{})}},103:(e,a,t)=>{"use strict";const r=t(747),i=t(622),{Sequelize:s,DataTypes:l}=t(121),o=i.basename(__filename),n=t(176),d={};let u;u=new s(n),r.readdirSync(__dirname).filter((e=>0!==e.indexOf(".")&&e!==o&&".js"===e.slice(-3))).forEach((e=>{const a=t(774)(i.join(__dirname,e))(u,l);d[a.name]=a})),Object.keys(d).forEach((e=>{d[e].associate&&d[e].associate(d)})),d.sequelize=u,d.Sequelize=s;const c={logging:console.log};u.sync(c).catch((e=>{console.log(e),process.exit()})),e.exports=d},774:e=>{function a(e){var a=new Error("Cannot find module '"+e+"'");throw a.code="MODULE_NOT_FOUND",a}a.keys=()=>[],a.resolve=a,a.id=774,e.exports=a},261:(e,a,t)=>{const r=t(127).Router(),i=t(591);r.get("/",i.get),r.post("/",i.store),r.get("/:id",i.detail),r.post("/:id",i.store),r.delete("/:id",i.delete),e.exports=r},322:(e,a,t)=>{const r=t(127).Router(),i=t(551);r.get("/",i.get),r.post("/",i.store),r.get("/:id",i.detail),r.post("/:id",i.store),r.delete("/:id",i.delete),e.exports=r},169:(e,a,t)=>{const r=t(127).Router(),i=t(569);r.get("/",i.get),r.post("/",i.store),r.get("/:id",i.detail),r.post("/:id",i.store),r.delete("/:id",i.delete),e.exports=r},802:(e,a,t)=>{const r=t(127).Router(),i=t(960);r.get("/",i.get),r.post("/",i.store),r.get("/:id",i.detail),r.post("/:id",i.store),r.delete("/:id",i.delete),e.exports=r},879:(e,a,t)=>{const r=t(127).Router(),i=t(957);r.get("/",i.get),r.post("/",i.store),r.get("/:id",i.detail),r.post("/:id",i.store),r.delete("/:id",i.delete),e.exports=r},741:(e,a)=>{a.response=(e,a,t,r)=>(r||(r={}),200!=a?(r=r.length?{error:r}:{},e.status(a).json({code:a,message:t,data:r})):e.status(a).json({code:a,message:t,data:r})),a.getPagination=(e,a)=>{const t=a?+a:10;return{limit:t,offset:e?e*t:0}},a.getPagingData=(e,a,t)=>{const{count:r,rows:i}=e;return{result:i,currentPage:a?+a:0,totalPages:Math.ceil(r/t),totalItems:r}}},479:e=>{"use strict";e.exports=require("cors")},334:e=>{"use strict";e.exports=require("dotenv")},127:e=>{"use strict";e.exports=require("express")},747:e=>{"use strict";e.exports=require("fs")},605:e=>{"use strict";e.exports=require("http")},622:e=>{"use strict";e.exports=require("path")},121:e=>{"use strict";e.exports=require("sequelize")}},a={};function t(r){var i=a[r];if(void 0!==i)return i.exports;var s=a[r]={exports:{}};return e[r](s,s.exports,t),s.exports}t.o=(e,a)=>Object.prototype.hasOwnProperty.call(e,a),(()=>{t(334).config();const e=t(127),a=t(479),r=e();r.use(a({origin:"*"}),e.json(),e.urlencoded({extended:!0})),r.use("/api/author",t(261)),r.use("/api/illustrator",t(322)),r.use("/api/label",t(169)),r.use("/api/novel",t(802)),r.use("/api/release",t(879));var i=t(605),s=function(e){var a=parseInt(e,10);return isNaN(a)?e:a>=0&&a}({DB_HOST:"localhost",DB_USERNAME:"root",DB_PASSWORD:"admin",DB_DATABASE:"project_datsys"}.PORT||"8090");r.set("port",s),i.createServer(r).listen(s)})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 176:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+__webpack_require__(334).config();
+
+module.exports = {
+  username: "root",
+  password: "admin",
+  database: "project_datsys",
+  port: "3306",
+  logging: false,
+  host: "localhost",
+  dialect: 'mysql',
+  operatorsAliases: 0,
+  timezone: '+07:00',
+};
+
+
+/***/ }),
+
+/***/ 591:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const {Op} = __webpack_require__(121);
+const {sequelize} = __webpack_require__(103);
+const db = __webpack_require__(103);
+const {response, getPagination, getPagingData} = __webpack_require__(741);
+
+const handleSorting = (sortBy, order) => {
+  order = order ? order : 'asc';
+
+  if (sortBy == 'novel_count') {
+    return [sequelize.literal('novelCount'), `${order}`], ['name', `${order}`];
+  } else {
+    return ['name', `${order}`];
+  }
+};
+
+exports.get = async (req, res) => {
+  const {page, size, name, sortBy, order} = req.query;
+  const condition = name ? {name: {[Op.like]: `%${name}%`}} : null;
+  const sort = sortBy ? [handleSorting(sortBy, order)] : [];
+
+  const {limit, offset} = getPagination(page, size);
+
+  const data = await db.Author.findAndCountAll({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)`,
+          ),
+          'novelCount',
+        ],
+      ],
+    },
+    where: condition,
+    limit: limit,
+    order: sort,
+    offset: offset,
+    distinct: true,
+
+    include: [
+      {
+        all: true,
+      },
+    ],
+  });
+
+  response(res, 200, 'success', getPagingData(data, page, limit));
+};
+
+exports.detail = async (req, res) => {
+  const where = {
+    id: req.params.id,
+  };
+
+  const result = await db.Author.findOne({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM novels n WHERE author.id = n.authorId)`,
+          ),
+          'novelCount',
+        ],
+      ],
+    },
+    where: where,
+    include: [
+      {
+        model: db.Novel,
+        as: 'novels',
+        include: [
+          {
+            model: db.Release,
+            as: 'releases',
+            where: {volumeNumber: 1},
+          },
+        ],
+      },
+    ],
+  });
+
+  if (!result) return response(res, 404, 'Data Author tidak ditemukan', {});
+
+  response(res, 200, 'success', result);
+};
+
+exports.store = async (req, res) => {
+  let result = {};
+
+  if (req.params.id) {
+    result = await db.Author.findOne({
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
+    });
+    if (!result) return response(res, 404, 'Data Author tidak ditemukan', {});
+  }
+
+  const data = {
+    name: req.body.name,
+    jpName: req.body.jpName,
+  };
+
+  if (req.params.id) {
+    await result.update(data);
+  } else {
+    result = await db.Author.create(data);
+  }
+
+  response(
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Author berhasil`,
+      await result.toJSON(),
+  );
+};
+
+exports.delete = async (req, res) => {
+  const result = await db.Author.findOne({
+    where: {id: req.params.id},
+    include: {
+      all: true,
+      nested: true,
+    },
+  });
+  if (!result) return response(res, 404, 'Data Author tidak ditemukan', {});
+
+  await result.destroy();
+
+  return response(res, 200, 'Data Author berhasil dihapus', {});
+};
+
+
+/***/ }),
+
+/***/ 551:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const {Op} = __webpack_require__(121);
+const {sequelize} = __webpack_require__(103);
+const db = __webpack_require__(103);
+const {response, getPagination, getPagingData} = __webpack_require__(741);
+
+const handleSorting = (sortBy, order) => {
+  order = order ? order : 'asc';
+
+  if (sortBy == 'novel_count') {
+    return [sequelize.literal('novelCount'), `${order}`], ['name', `${order}`];
+  } else {
+    return ['name', `${order}`];
+  }
+};
+
+exports.get = async (req, res) => {
+  const {page, size, name, sortBy, order} = req.query;
+  const condition = name ? {name: {[Op.like]: `%${name}%`}} : null;
+  const sort = sortBy ? [handleSorting(sortBy, order)] : [];
+
+  const {limit, offset} = getPagination(page, size);
+
+  const data = await db.Illustrator.findAndCountAll({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM novels n 
+              WHERE illustrator.id = n.illustratorId)`,
+          ),
+          'novelCount',
+        ],
+      ],
+    },
+    where: condition,
+    limit: limit,
+    order: sort,
+    offset: offset,
+    distinct: true,
+
+    include: [
+      {
+        all: true,
+      },
+    ],
+  });
+
+  response(res, 200, 'success', getPagingData(data, page, limit));
+};
+
+exports.detail = async (req, res) => {
+  const where = {
+    id: req.params.id,
+  };
+
+  const result = await db.Illustrator.findOne({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM novels n 
+              WHERE illustrator.id = n.illustratorId)`,
+          ),
+          'novelCount',
+        ],
+      ],
+    },
+    where: where,
+    include: [
+      {
+        model: db.Novel,
+        as: 'novels',
+        include: [
+          {
+            model: db.Release,
+            as: 'releases',
+            where: {volumeNumber: 1},
+          },
+        ],
+      },
+    ],
+  });
+
+  if (!result) {
+    return response(res, 404, 'Data Illustrator tidak ditemukan', {});
+  }
+
+  response(res, 200, 'success', result);
+};
+
+exports.store = async (req, res) => {
+  let result = {};
+
+  if (req.params.id) {
+    result = await db.Illustrator.findOne({
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
+    });
+    if (!result) {
+      return response(res, 404, 'Data Illustrator tidak ditemukan', {});
+    }
+  }
+
+  const data = {
+    name: req.body.name,
+    jpName: req.body.jpName,
+  };
+
+  if (req.params.id) {
+    await result.update(data);
+  } else {
+    result = await db.Illustrator.create(data);
+  }
+
+  response(
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Illustrator berhasil`,
+      await result.toJSON(),
+  );
+};
+
+exports.delete = async (req, res) => {
+  const result = await db.Illustrator.findOne({
+    where: {id: req.params.id},
+    include: {
+      all: true,
+      nested: true,
+    },
+  });
+  if (!result) {
+    return response(res, 404, 'Data Illustrator tidak ditemukan', {});
+  }
+
+  await result.destroy();
+
+  return response(res, 200, 'Data Illustrator berhasil dihapus', {});
+};
+
+
+/***/ }),
+
+/***/ 569:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const {Op} = __webpack_require__(121);
+const {sequelize} = __webpack_require__(103);
+const db = __webpack_require__(103);
+const {response, getPagination, getPagingData} = __webpack_require__(741);
+
+const handleSorting = (sortBy, order) => {
+  order = order ? order : 'asc';
+
+  if (sortBy == 'novel_count') {
+    return [sequelize.literal('novelCount'), `${order}`], ['name', `${order}`];
+  } else {
+    return ['name', `${order}`];
+  }
+};
+
+exports.get = async (req, res) => {
+  const {page, size, name, sortBy, order} = req.query;
+  const condition = name ? {name: {[Op.like]: `%${name}%`}} : null;
+  const sort = sortBy ? [handleSorting(sortBy, order)] : [];
+
+  const {limit, offset} = getPagination(page, size);
+
+  const data = await db.Label.findAndCountAll({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM novels n WHERE label.id = n.labelId)`,
+          ),
+          'novelCount',
+        ],
+      ],
+    },
+    where: condition,
+    limit: limit,
+    order: sort,
+    offset: offset,
+    distinct: true,
+
+    include: [
+      {
+        all: true,
+      },
+    ],
+  });
+
+  response(res, 200, 'success', getPagingData(data, page, limit));
+};
+
+exports.detail = async (req, res) => {
+  const where = {
+    id: req.params.id,
+  };
+
+  const result = await db.Label.findOne({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(`(SELECT COUNT(*) FROM novels n 
+          WHERE label.id = n.labelId)`),
+          'novelCount',
+        ],
+      ],
+    },
+    where: where,
+    include: [
+      {
+        model: db.Novel,
+        as: 'novels',
+        include: [
+          {
+            model: db.Release,
+            as: 'releases',
+            where: {volumeNumber: 1},
+          },
+        ],
+      },
+    ],
+  });
+
+  if (!result) return response(res, 404, 'Data Label tidak ditemukan', {});
+
+  response(res, 200, 'success', result);
+};
+
+exports.store = async (req, res) => {
+  let result = {};
+
+  if (req.params.id) {
+    result = await db.Label.findOne({
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
+    });
+    if (!result) return response(res, 404, 'Data Label tidak ditemukan', {});
+  }
+
+  const data = {
+    name: req.body.name,
+    jpName: req.body.jpName,
+    link: req.body.link,
+  };
+
+  if (req.params.id) {
+    await result.update(data);
+  } else {
+    result = await db.Label.create(data);
+  }
+
+  response(
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Label berhasil`,
+      await result.toJSON(),
+  );
+};
+
+exports.delete = async (req, res) => {
+  const result = await db.Label.findOne({
+    where: {id: req.params.id},
+    include: {
+      all: true,
+      nested: true,
+    },
+  });
+  if (!result) return response(res, 404, 'Data Label tidak ditemukan', {});
+
+  await result.destroy();
+
+  return response(res, 200, 'Data Label berhasil dihapus', {});
+};
+
+
+/***/ }),
+
+/***/ 960:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const {Op} = __webpack_require__(121);
+const {sequelize} = __webpack_require__(103);
+const db = __webpack_require__(103);
+const {response, getPagination, getPagingData} = __webpack_require__(741);
+
+const handleSorting = (sortBy, order) => {
+  order = order ? order : 'asc';
+
+  if (sortBy == 'volume_count') {
+    return (
+      [sequelize.literal('volumeCount'), `${order}`], ['title', `${order}`]
+    );
+  } else if (sortBy == 'last_release') {
+    return (
+      [sequelize.literal('lastRelease'), `${order}`], ['title', `${order}`]
+    );
+  } else {
+    return ['title', `${order}`];
+  }
+};
+
+exports.get = async (req, res) => {
+  const {page, size, title, sortBy, order} = req.query;
+  const condition = title ? {title: {[Op.like]: `%${title}%`}} : null;
+  const sort = sortBy ? [handleSorting(sortBy, order)] : [];
+
+  const {limit, offset} = getPagination(page, size);
+
+  const data = await db.Novel.findAndCountAll({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`,
+          ),
+          'volumeCount',
+        ],
+        [
+          sequelize.literal(
+              `(SELECT MAX(r.date) FROM releases r WHERE novel.id = r.novelId)`,
+          ),
+          'lastRelease',
+        ],
+        [
+          sequelize.literal(
+              `(SELECT r.coverUrl FROM releases r 
+                WHERE novel.id = r.novelId 
+                ORDER BY r.volumeNumber ASC LIMIT 1)`,
+          ),
+          'coverUrl',
+        ],
+      ],
+    },
+    where: condition,
+    order: sort,
+    limit: limit,
+    offset: offset,
+    distinct: true,
+    include: [
+      {
+        all: true,
+        nested: true,
+      },
+    ],
+  });
+
+  response(res, 200, 'success', getPagingData(data, page, limit));
+};
+
+exports.detail = async (req, res) => {
+  const where = {
+    id: req.params.id,
+  };
+
+  const result = await db.Novel.findOne({
+    where: where,
+    attributes: {
+      include: [
+        [
+          sequelize.literal(
+              `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`,
+          ),
+          'volumeCount',
+        ],
+        [
+          sequelize.literal(
+              `(SELECT r.coverUrl FROM releases r 
+                WHERE novel.id = r.novelId 
+                ORDER BY r.volumeNumber ASC LIMIT 1)`,
+          ),
+          'coverUrl',
+        ],
+      ],
+    },
+    include: {
+      all: true,
+      nested: true,
+    },
+  });
+
+  if (!result) return response(res, 404, 'Data Novel tidak ditemukan', {});
+
+  response(res, 200, 'success', result);
+};
+
+exports.store = async (req, res) => {
+  let result = {};
+
+  if (req.params.id) {
+    result = await db.Novel.findOne({
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
+    });
+    if (!result) return response(res, 404, 'Data Novel tidak ditemukan', {});
+  }
+
+  const data = {
+    title: req.body.title,
+    jpTitle: req.body.jpTitle,
+    plot: req.body.plot,
+    genre: req.body.genre,
+    link: req.body.link,
+    authorId: req.body.authorId,
+    illustratorId: req.body.illustratorId,
+    labelId: req.body.labelId,
+  };
+
+  if (req.params.id) {
+    await result.update(data);
+  } else {
+    result = await db.Novel.create(data);
+  }
+
+  response(
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Novel berhasil`,
+      await result.toJSON(),
+  );
+};
+
+exports.delete = async (req, res) => {
+  const result = await db.Novel.findOne({
+    where: {id: req.params.id},
+    include: {
+      all: true,
+      nested: true,
+    },
+  });
+  if (!result) return response(res, 404, 'Data Novel tidak ditemukan', {});
+
+  await result.destroy();
+
+  return response(res, 200, 'Data Novel berhasil dihapus', {});
+};
+
+
+/***/ }),
+
+/***/ 957:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const {where} = __webpack_require__(121);
+const db = __webpack_require__(103);
+const {response, getPagination, getPagingData} = __webpack_require__(741);
+
+exports.get = async (req, res) => {
+  const {page, size} = req.query;
+
+  const {limit, offset} = getPagination(page, size);
+
+  const data = await db.Release.findAndCountAll({
+    where: where,
+    limit: limit,
+    offset: offset,
+    distinct: true,
+    include: [
+      {
+        all: true,
+      },
+    ],
+  });
+
+  response(res, 200, 'success', getPagingData(data, page, limit));
+};
+
+exports.detail = async (req, res) => {
+  const where = {
+    id: req.params.id,
+  };
+
+  const result = await db.Release.findOne({
+    where: where,
+    include: {
+      all: true,
+    },
+  });
+
+  if (!result) return response(res, 404, 'Data Release tidak ditemukan', {});
+
+  response(res, 200, 'success', result);
+};
+
+exports.store = async (req, res) => {
+  let result = {};
+
+  if (req.params.id) {
+    result = await db.Release.findOne({
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
+    });
+    if (!result) return response(res, 404, 'Data Release tidak ditemukan', {});
+  }
+
+  const data = {
+    volumeNumber: req.body.volumeNumber,
+    date: req.body.date,
+    coverUrl: req.body.coverUrl,
+    page: req.body.page,
+    storeUrl: req.body.storeUrl,
+    novelId: req.body.novelId,
+  };
+
+  if (req.params.id) {
+    await result.update(data);
+  } else {
+    result = await db.Release.create(data);
+  }
+
+  response(
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Release berhasil`,
+      await result.toJSON(),
+  );
+};
+
+exports.delete = async (req, res) => {
+  const result = await db.Release.findOne({
+    where: {id: req.params.id},
+    include: {
+      all: true,
+      nested: true,
+    },
+  });
+  if (!result) return response(res, 404, 'Data Release tidak ditemukan', {});
+
+  await result.destroy();
+
+  return response(res, 200, 'Data Release berhasil dihapus', {});
+};
+
+
+/***/ }),
+
+/***/ 399:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+const {Model} = __webpack_require__(121);
+module.exports = (sequelize, DataTypes) => {
+  /**
+   * Author model for sequelize
+   */
+  class Author extends Model {}
+  Author.init(
+      {
+        name: DataTypes.STRING,
+        jpName: DataTypes.STRING,
+      },
+      {
+        sequelize,
+        modelName: 'Author',
+      },
+  );
+
+  Author.associate = function(models) {
+    Author.hasMany(models.Novel, {
+      foreignKey: 'authorId',
+      as: 'novels',
+    });
+  };
+
+  Author.prototype.toJSON = function() {
+    return Object.assign({}, this.get());
+  };
+
+  return Author;
+};
+
+
+/***/ }),
+
+/***/ 613:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+const {Model} = __webpack_require__(121);
+module.exports = (sequelize, DataTypes) => {
+  /**
+   * Illustrator model for sequelize
+   */
+  class Illustrator extends Model {}
+
+  Illustrator.init(
+      {
+        name: DataTypes.STRING,
+        jpName: DataTypes.STRING,
+      },
+      {
+        sequelize,
+        modelName: 'Illustrator',
+      },
+  );
+
+  Illustrator.associate = function(models) {
+    Illustrator.hasMany(models.Novel, {
+      foreignKey: 'illustratorId',
+      as: 'novels',
+    });
+  };
+
+  Illustrator.prototype.toJSON = function() {
+    return Object.assign({}, this.get());
+  };
+
+  return Illustrator;
+};
+
+
+/***/ }),
+
+/***/ 103:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const {Sequelize} = __webpack_require__(121);
+const config = __webpack_require__(176);
+const db = {};
+const sequelize = new Sequelize(config);
+
+const modules = [
+  __webpack_require__(399),
+  __webpack_require__(613),
+  __webpack_require__(869),
+  __webpack_require__(259),
+  __webpack_require__(724),
+];
+
+modules.forEach((module) => {
+  const model = module(sequelize, Sequelize, config);
+  db[model.name] = model;
+});
+
+Object.keys(db).forEach((key) => {
+  if ('associate' in db[key]) {
+    db[key].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+const sequelizeOptions = {logging: console.log};
+
+sequelize.sync(sequelizeOptions).catch((err) => {
+  console.log(err);
+  process.exit();
+});
+
+module.exports = db;
+
+// https://stackoverflow.com/questions/62556633/sequelize-6-import-models-from-file
+
+
+/***/ }),
+
+/***/ 869:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+const {Model} = __webpack_require__(121);
+module.exports = (sequelize, DataTypes) => {
+  /**
+   * Label model for sequelize
+   */
+  class Label extends Model {}
+  Label.init(
+      {
+        name: DataTypes.STRING,
+        jpName: DataTypes.STRING,
+        link: DataTypes.STRING,
+      },
+      {
+        sequelize,
+        modelName: 'Label',
+      },
+  );
+
+  Label.associate = function(models) {
+    Label.hasMany(models.Novel, {
+      foreignKey: 'labelId',
+      as: 'novels',
+    });
+  };
+
+  Label.prototype.toJSON = function() {
+    return Object.assign({}, this.get());
+  };
+
+  return Label;
+};
+
+
+/***/ }),
+
+/***/ 259:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+const {Model} = __webpack_require__(121);
+module.exports = (sequelize, DataTypes) => {
+  /**
+   * Novel model for sequelize
+   */
+  class Novel extends Model {}
+  Novel.init(
+      {
+        title: DataTypes.STRING,
+        jpTitle: DataTypes.STRING,
+        plot: DataTypes.TEXT,
+        genre: DataTypes.STRING,
+        link: DataTypes.STRING,
+        authorId: DataTypes.INTEGER,
+        illustratorId: DataTypes.INTEGER,
+        labelId: DataTypes.INTEGER,
+      },
+      {
+        sequelize,
+        modelName: 'Novel',
+      },
+  );
+
+  Novel.associate = function(models) {
+    Novel.belongsTo(models.Author, {
+      foreignKey: 'authorId',
+      as: 'author',
+    });
+    Novel.belongsTo(models.Illustrator, {
+      foreignKey: 'illustratorId',
+      as: 'illustrator',
+    });
+    Novel.belongsTo(models.Label, {
+      foreignKey: 'labelId',
+      as: 'label',
+    });
+    Novel.hasMany(models.Release, {
+      foreignKey: 'novelId',
+      as: 'releases',
+    });
+  };
+
+  Novel.prototype.toJSON = function() {
+    return Object.assign({}, this.get());
+  };
+
+  return Novel;
+};
+
+
+/***/ }),
+
+/***/ 724:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+const {Model} = __webpack_require__(121);
+module.exports = (sequelize, DataTypes) => {
+  /**
+   * Release model for sequelize
+   */
+  class Release extends Model {}
+  Release.init(
+      {
+        volumeNumber: DataTypes.STRING,
+        date: DataTypes.DATE,
+        coverUrl: DataTypes.STRING,
+        page: DataTypes.INTEGER,
+        storeUrl: DataTypes.STRING,
+        novelId: DataTypes.INTEGER,
+      },
+      {
+        sequelize,
+        modelName: 'Release',
+      },
+  );
+
+  Release.associate = function(models) {
+    Release.belongsTo(models.Novel, {
+      foreignKey: 'novelId',
+      as: 'novel',
+    });
+  };
+
+  Release.prototype.toJSON = function() {
+    return Object.assign({}, this.get());
+  };
+
+  return Release;
+};
+
+
+/***/ }),
+
+/***/ 261:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const express = __webpack_require__(127);
+const router = new express.Router();
+
+const controller = __webpack_require__(591);
+
+router.get('/', controller.get);
+router.post('/', controller.store);
+router.get('/:id', controller.detail);
+router.post('/:id', controller.store);
+router.delete('/:id', controller.delete);
+
+module.exports = router;
+
+
+/***/ }),
+
+/***/ 322:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const express = __webpack_require__(127);
+const router = new express.Router();
+
+const controller = __webpack_require__(551);
+
+router.get('/', controller.get);
+router.post('/', controller.store);
+router.get('/:id', controller.detail);
+router.post('/:id', controller.store);
+router.delete('/:id', controller.delete);
+
+module.exports = router;
+
+
+/***/ }),
+
+/***/ 169:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const express = __webpack_require__(127);
+const router = new express.Router();
+
+const controller = __webpack_require__(569);
+
+router.get('/', controller.get);
+router.post('/', controller.store);
+router.get('/:id', controller.detail);
+router.post('/:id', controller.store);
+router.delete('/:id', controller.delete);
+
+module.exports = router;
+
+
+/***/ }),
+
+/***/ 802:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const express = __webpack_require__(127);
+const router = new express.Router();
+
+const controller = __webpack_require__(960);
+
+router.get('/', controller.get);
+router.post('/', controller.store);
+router.get('/:id', controller.detail);
+router.post('/:id', controller.store);
+router.delete('/:id', controller.delete);
+
+module.exports = router;
+
+
+/***/ }),
+
+/***/ 879:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const express = __webpack_require__(127);
+const router = new express.Router();
+
+const controller = __webpack_require__(957);
+
+router.get('/', controller.get);
+router.post('/', controller.store);
+router.get('/:id', controller.detail);
+router.post('/:id', controller.store);
+router.delete('/:id', controller.delete);
+
+module.exports = router;
+
+
+/***/ }),
+
+/***/ 741:
+/***/ ((__unused_webpack_module, exports) => {
+
+exports.response = (res, code, message, data) => {
+  if (!data) data = {};
+
+  if (code != 200) {
+    if (data.length) data = {error: data};
+    else data = {};
+
+    return res.status(code).json({
+      code: code,
+      message: message,
+      data: data,
+    });
+  } else {
+    return res.status(code).json({
+      code: code,
+      message: message,
+      data: data,
+    });
+  }
+};
+
+exports.getPagination = (page, size) => {
+  const limit = size ? +size : 10;
+  const offset = page ? page * limit : 0;
+
+  return {limit, offset};
+};
+
+exports.getPagingData = (data, page, limit) => {
+  const {count: totalItems, rows: result} = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return {result, currentPage, totalPages, totalItems};
+};
+
+
+/***/ }),
+
+/***/ 479:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("cors");;
+
+/***/ }),
+
+/***/ 334:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("dotenv");;
+
+/***/ }),
+
+/***/ 127:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("express");;
+
+/***/ }),
+
+/***/ 622:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");;
+
+/***/ }),
+
+/***/ 121:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("sequelize");;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+const path = __webpack_require__(622);
+const express = __webpack_require__(127);
+const cors = __webpack_require__(479);
+const app = express();
+
+app.use(
+    cors({origin: '*'}),
+    express.json(),
+    express.urlencoded({
+      extended: true,
+    }),
+);
+
+app.use('/api/author', __webpack_require__(261));
+app.use('/api/illustrator', __webpack_require__(322));
+app.use('/api/label', __webpack_require__(169));
+app.use('/api/novel', __webpack_require__(802));
+app.use('/api/release', __webpack_require__(879));
+
+app.use(express.static(path.join(__dirname, './views')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './views/index.html'));
+});
+
+const port = process.env.PORT || '8090';
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+
+})();
+
+/******/ })()
+;

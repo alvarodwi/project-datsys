@@ -1,13 +1,13 @@
-const { Op, where } = require("sequelize");
-const db = require("../models");
-const { response, getPagination, getPagingData } = require("../utils/helpers");
+const {where} = require('sequelize');
+const db = require('../models');
+const {response, getPagination, getPagingData} = require('../utils/helpers');
 
 exports.get = async (req, res) => {
-  const { page, size } = req.query;
+  const {page, size} = req.query;
 
-  const { limit, offset } = getPagination(page, size);
+  const {limit, offset} = getPagination(page, size);
 
-  var data = await db.Release.findAndCountAll({
+  const data = await db.Release.findAndCountAll({
     where: where,
     limit: limit,
     offset: offset,
@@ -19,38 +19,38 @@ exports.get = async (req, res) => {
     ],
   });
 
-  response(res, 200, "success", getPagingData(data, page, limit));
+  response(res, 200, 'success', getPagingData(data, page, limit));
 };
 
 exports.detail = async (req, res) => {
-  var where = {
+  const where = {
     id: req.params.id,
   };
 
-  var result = await db.Release.findOne({
+  const result = await db.Release.findOne({
     where: where,
     include: {
       all: true,
     },
   });
 
-  if (!result) return response(res, 404, "Data Release tidak ditemukan", {});
+  if (!result) return response(res, 404, 'Data Release tidak ditemukan', {});
 
-  response(res, 200, "success", result);
+  response(res, 200, 'success', result);
 };
 
 exports.store = async (req, res) => {
-  var result = {};
+  let result = {};
 
   if (req.params.id) {
     result = await db.Release.findOne({
-      where: { id: req.params.id },
-      include: { all: true, nested: true },
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
     });
-    if (!result) return response(res, 404, "Data Release tidak ditemukan", {});
+    if (!result) return response(res, 404, 'Data Release tidak ditemukan', {});
   }
 
-  var data = {
+  const data = {
     volumeNumber: req.body.volumeNumber,
     date: req.body.date,
     coverUrl: req.body.coverUrl,
@@ -66,24 +66,24 @@ exports.store = async (req, res) => {
   }
 
   response(
-    res,
-    200,
-    (!req.params.id ? "Tambah" : "Ubah") + ` data Release berhasil`,
-    await result.toJSON()
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Release berhasil`,
+      await result.toJSON(),
   );
 };
 
 exports.delete = async (req, res) => {
-  var result = await db.Release.findOne({
-    where: { id: req.params.id },
+  const result = await db.Release.findOne({
+    where: {id: req.params.id},
     include: {
       all: true,
       nested: true,
     },
   });
-  if (!result) return response(res, 404, "Data Release tidak ditemukan", {});
+  if (!result) return response(res, 404, 'Data Release tidak ditemukan', {});
 
   await result.destroy();
 
-  return response(res, 200, "Data Release berhasil dihapus", {});
+  return response(res, 200, 'Data Release berhasil dihapus', {});
 };

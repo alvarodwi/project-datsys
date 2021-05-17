@@ -1,8 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
-const dotenv = require('dotenv').config({
-    path: path.join(__dirname, '.env')
-});
+const Dotenv = require('dotenv-webpack');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
@@ -12,12 +9,13 @@ module.exports = {
   target: 'node',
   output: {
     path: path.resolve(__dirname, '.'),
-    filename: 'server.bundle.js'
+    filename: 'server.bundle.js',
   },
-  externals: nodeExternals(),
+  externals: [nodeExternals()],
   plugins: [
-      new webpack.DefinePlugin( {
-          "process.env" : JSON.stringify(dotenv.parsed)
-      }),
+    new Dotenv(),
   ],
+  optimization: {
+    minimize: false,
+  },
 };

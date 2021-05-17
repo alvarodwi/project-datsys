@@ -22,6 +22,19 @@ Proyek ini menggunakan npm. Pastikan `npm install` telah dijalankan melalui comm
 
 Silakan buka [README.md](server/README.md) di folder server kemudian [README.md](client/README.md) di folder client untuk memulai aplikasi.
 
+## Build Production
+
+##### (Hanya bisa dilakukan jika telah mengikuti tahap-tahap di folder [/server](server))
+
+****
+
+Untuk langkah mudah jalankan perintah berikut di root folder project ini :
+
+```
+npm run build
+npm run start // untuk menjalankan project versi production build
+```
+
 ## Lisensi
 
 MIT License 2021

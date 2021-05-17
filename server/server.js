@@ -1,63 +1,31 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
 const app = express();
 
 app.use(
-  cors({ origin: "*" }),
-  express.json(),
-  express.urlencoded({
-    extended: true,
-  }),
+    cors({origin: '*'}),
+    express.json(),
+    express.urlencoded({
+      extended: true,
+    }),
 );
 
-app.use("/api/author", require("./routes/author.route"));
-app.use("/api/illustrator", require("./routes/illustrator.route"));
-app.use("/api/label", require("./routes/label.route"));
-app.use("/api/novel", require("./routes/novel.route"));
-app.use("/api/release", require("./routes/release.route"));
+app.use('/api/author', require('./routes/author.route'));
+app.use('/api/illustrator', require('./routes/illustrator.route'));
+app.use('/api/label', require('./routes/label.route'));
+app.use('/api/novel', require('./routes/novel.route'));
+app.use('/api/release', require('./routes/release.route'));
 
+app.use(express.static(path.join(__dirname, './views')));
 
-/**
- * Module dependencies.
- */
- var http = require("http");
- 
- /**
-  * Get port from environment and store in Express.
-  */
- 
- var port = normalizePort(process.env.PORT || "8090");
- app.set("port", port);
- 
- /**
-  * Create HTTP server.
-  */
- 
- var server = http.createServer(app);
- 
- /**
-  * Listen on provided port, on all network interfaces.
-  */
- 
- server.listen(port);
- 
- /**
-  * Normalize a port into a number, string, or false.
-  */
- function normalizePort(val) {
-   var port = parseInt(val, 10);
- 
-   if (isNaN(port)) {
-     // named pipe
-     return val;
-   }
- 
-   if (port >= 0) {
-     // port number
-     return port;
-   }
- 
-   return false;
- }
- 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './views/index.html'));
+});
+
+const port = process.env.PORT || '8090';
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+

@@ -1,26 +1,29 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
+  /**
+   * Author model for sequelize
+   */
   class Author extends Model {}
   Author.init(
-    {
-      name: DataTypes.STRING,
-      jpName: DataTypes.STRING,
-    },
-    {
-      sequelize,
-      modelName: "Author",
-    }
+      {
+        name: DataTypes.STRING,
+        jpName: DataTypes.STRING,
+      },
+      {
+        sequelize,
+        modelName: 'Author',
+      },
   );
 
-  Author.associate = function (models) {
+  Author.associate = function(models) {
     Author.hasMany(models.Novel, {
-      foreignKey: "authorId",
-      as: "novels",
+      foreignKey: 'authorId',
+      as: 'novels',
     });
   };
 
-  Author.prototype.toJSON = function () {
+  Author.prototype.toJSON = function() {
     return Object.assign({}, this.get());
   };
 

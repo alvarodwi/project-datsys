@@ -1,37 +1,33 @@
-"use strict";
+'use strict';
 
-const fs = require("fs");
-const path = require("path");
-const { Sequelize, DataTypes } = require("sequelize");
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || "development";
-const config = require("../config/config");
+const {Sequelize} = require('sequelize');
+const config = require('../config/config');
 const db = {};
+const sequelize = new Sequelize(config);
 
-let sequelize;
-sequelize = new Sequelize(config);
+const modules = [
+  require('./author.js'),
+  require('./illustrator.js'),
+  require('./label.js'),
+  require('./novel.js'),
+  require('./release.js'),
+];
 
-fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-    );
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
-    db[model.name] = model;
-  });
+modules.forEach((module) => {
+  const model = module(sequelize, Sequelize, config);
+  db[model.name] = model;
+});
 
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(db).forEach((key) => {
+  if ('associate' in db[key]) {
+    db[key].associate(db);
   }
 });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-const sequelizeOptions = { logging: console.log };
+const sequelizeOptions = {logging: console.log};
 
 sequelize.sync(sequelizeOptions).catch((err) => {
   console.log(err);
@@ -40,4 +36,4 @@ sequelize.sync(sequelizeOptions).catch((err) => {
 
 module.exports = db;
 
-//https://stackoverflow.com/questions/62556633/sequelize-6-import-models-from-file
+// https://stackoverflow.com/questions/62556633/sequelize-6-import-models-from-file

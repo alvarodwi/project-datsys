@@ -1,51 +1,53 @@
-const { Op } = require("sequelize");
-const { sequelize } = require("../models/");
-const db = require("../models/");
-const { response, getPagination, getPagingData } = require("../utils/helpers");
+const {Op} = require('sequelize');
+const {sequelize} = require('../models/');
+const db = require('../models/');
+const {response, getPagination, getPagingData} = require('../utils/helpers');
 
 const handleSorting = (sortBy, order) => {
-  order = order ? order : "asc";
+  order = order ? order : 'asc';
 
-  if (sortBy == "volume_count") {
+  if (sortBy == 'volume_count') {
     return (
-      [sequelize.literal("volumeCount"), `${order}`], ["title", `${order}`]
+      [sequelize.literal('volumeCount'), `${order}`], ['title', `${order}`]
     );
-  } else if (sortBy == "last_release") {
+  } else if (sortBy == 'last_release') {
     return (
-      [sequelize.literal("lastRelease"), `${order}`], ["title", `${order}`]
+      [sequelize.literal('lastRelease'), `${order}`], ['title', `${order}`]
     );
   } else {
-    return ["title", `${order}`];
+    return ['title', `${order}`];
   }
 };
 
 exports.get = async (req, res) => {
-  const { page, size, title, sort_by, order } = req.query;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  var sort = sort_by ? [handleSorting(sort_by, order)] : [];
+  const {page, size, title, sortBy, order} = req.query;
+  const condition = title ? {title: {[Op.like]: `%${title}%`}} : null;
+  const sort = sortBy ? [handleSorting(sortBy, order)] : [];
 
-  const { limit, offset } = getPagination(page, size);
+  const {limit, offset} = getPagination(page, size);
 
-  var data = await db.Novel.findAndCountAll({
+  const data = await db.Novel.findAndCountAll({
     attributes: {
       include: [
         [
           sequelize.literal(
-            `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`
+              `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`,
           ),
-          "volumeCount",
+          'volumeCount',
         ],
         [
           sequelize.literal(
-            `(SELECT MAX(r.date) FROM releases r WHERE novel.id = r.novelId)`
+              `(SELECT MAX(r.date) FROM releases r WHERE novel.id = r.novelId)`,
           ),
-          "lastRelease",
+          'lastRelease',
         ],
         [
           sequelize.literal(
-            `(SELECT r.coverUrl FROM releases r WHERE novel.id = r.novelId ORDER BY r.volumeNumber ASC LIMIT 1)`
+              `(SELECT r.coverUrl FROM releases r 
+                WHERE novel.id = r.novelId 
+                ORDER BY r.volumeNumber ASC LIMIT 1)`,
           ),
-          "coverUrl",
+          'coverUrl',
         ],
       ],
     },
@@ -62,29 +64,31 @@ exports.get = async (req, res) => {
     ],
   });
 
-  response(res, 200, "success", getPagingData(data, page, limit));
+  response(res, 200, 'success', getPagingData(data, page, limit));
 };
 
 exports.detail = async (req, res) => {
-  var where = {
+  const where = {
     id: req.params.id,
   };
 
-  var result = await db.Novel.findOne({
+  const result = await db.Novel.findOne({
     where: where,
     attributes: {
       include: [
         [
           sequelize.literal(
-            `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`
+              `(SELECT COUNT(*) FROM releases r WHERE novel.id = r.novelId)`,
           ),
-          "volumeCount",
+          'volumeCount',
         ],
         [
           sequelize.literal(
-            `(SELECT r.coverUrl FROM releases r WHERE novel.id = r.novelId ORDER BY r.volumeNumber ASC LIMIT 1)`
+              `(SELECT r.coverUrl FROM releases r 
+                WHERE novel.id = r.novelId 
+                ORDER BY r.volumeNumber ASC LIMIT 1)`,
           ),
-          "coverUrl",
+          'coverUrl',
         ],
       ],
     },
@@ -94,23 +98,23 @@ exports.detail = async (req, res) => {
     },
   });
 
-  if (!result) return response(res, 404, "Data Novel tidak ditemukan", {});
+  if (!result) return response(res, 404, 'Data Novel tidak ditemukan', {});
 
-  response(res, 200, "success", result);
+  response(res, 200, 'success', result);
 };
 
 exports.store = async (req, res) => {
-  var result = {};
+  let result = {};
 
   if (req.params.id) {
     result = await db.Novel.findOne({
-      where: { id: req.params.id },
-      include: { all: true, nested: true },
+      where: {id: req.params.id},
+      include: {all: true, nested: true},
     });
-    if (!result) return response(res, 404, "Data Novel tidak ditemukan", {});
+    if (!result) return response(res, 404, 'Data Novel tidak ditemukan', {});
   }
 
-  var data = {
+  const data = {
     title: req.body.title,
     jpTitle: req.body.jpTitle,
     plot: req.body.plot,
@@ -128,24 +132,24 @@ exports.store = async (req, res) => {
   }
 
   response(
-    res,
-    200,
-    (!req.params.id ? "Tambah" : "Ubah") + ` data Novel berhasil`,
-    await result.toJSON()
+      res,
+      200,
+      (!req.params.id ? 'Tambah' : 'Ubah') + ` data Novel berhasil`,
+      await result.toJSON(),
   );
 };
 
 exports.delete = async (req, res) => {
-  var result = await db.Novel.findOne({
-    where: { id: req.params.id },
+  const result = await db.Novel.findOne({
+    where: {id: req.params.id},
     include: {
       all: true,
       nested: true,
     },
   });
-  if (!result) return response(res, 404, "Data Novel tidak ditemukan", {});
+  if (!result) return response(res, 404, 'Data Novel tidak ditemukan', {});
 
   await result.destroy();
 
-  return response(res, 200, "Data Novel berhasil dihapus", {});
+  return response(res, 200, 'Data Novel berhasil dihapus', {});
 };
