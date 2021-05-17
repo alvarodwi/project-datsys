@@ -22,16 +22,24 @@
           Author
         </h2>
         <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-          {{ !_.isEmpty(novel.author) ? novel.author.name : "unknown" }}
+          <span v-if="!_.isEmpty(novel.author)">
+            <router-link :to="'/author/' + novel.authorId">
+              {{ novel.author.name }}
+            </router-link>
+          </span>
+          <span v-else>unknown</span>
         </p>
 
         <h2 class="text-steel-500 font-semibold text-2xl tracking-wide">
           Illustrator
         </h2>
         <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-          {{
-            !_.isEmpty(novel.illustrator) ? novel.illustrator.name : "unknown"
-          }}
+          <span v-if="!_.isEmpty(novel.illustrator)">
+            <router-link :to="'/illustrator/' + novel.illustratorId">
+              {{ novel.illustrator.name }}
+            </router-link>
+          </span>
+          <span v-else>unknown</span>
         </p>
 
         <h2 class="text-steel-500 font-semibold text-2xl tracking-wide">
@@ -54,15 +62,22 @@
         Label
       </h2>
       <p class="mt-2 text-steel-500 text-base md:text-xl mb-8">
-        {{ !_.isEmpty(novel.label) ? novel.label.name : "unknown" }}
+        <span v-if="!_.isEmpty(novel.label)">
+          <router-link :to="'/label/' + novel.labelId">
+            {{ novel.label.name }}
+          </router-link>
+        </span>
+        <span v-else>unknown</span>
       </p>
 
       <h2 class="text-steel-500 font-semibold text-2xl tracking-wide">
         Links
       </h2>
-      <a class="mt-4 text-steel-500 text-base md:text-xl mb-8" href="">{{
-        novel.link
-      }}</a>
+      <a
+        class="mt-4 text-steel-500 text-base md:text-xl mb-8"
+        :href="novel.link"
+        >{{ novel.link }}</a
+      >
     </div>
     <div class="bg-gray-500 w-auto h-8 -mx-4"></div>
     <div>

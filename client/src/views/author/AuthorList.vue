@@ -74,6 +74,7 @@
                   <div class="text-sm">
                     {{ author.jpName }}
                   </div>
+                  <div class="text-sm">{{ author.novelCount }} works</div>
                   <router-link :to="'/author/' + author.id" class="text-sm"
                     >Details</router-link
                   >

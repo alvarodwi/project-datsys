@@ -80,6 +80,7 @@
                   <div class="text-sm">
                     {{ label.jpName }}
                   </div>
+                  <div class="text-sm">{{ label.novelCount }} works</div>
                   <router-link :to="'/label/' + label.id" class="text-sm"
                     >Details</router-link
                   >
@@ -87,7 +88,7 @@
                 <td
                   class="p-4 border-b-2 border-steel-300 bg-sepia-500 text-steel-500"
                 >
-                  {{ label.link }}
+                  <a :href="label.link">{{ label.link }}</a>
                 </td>
               </tr>
             </tbody>

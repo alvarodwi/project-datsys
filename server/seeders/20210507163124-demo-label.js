@@ -40,6 +40,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Kodansha Ranobe Bunko",
+          jpName: "講談社ラノベ文庫",
+          link: "http://kc.kodansha.co.jp/ln/",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

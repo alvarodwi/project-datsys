@@ -74,6 +74,7 @@
                   <div class="text-sm">
                     {{ illustrator.jpName }}
                   </div>
+                  <div class="text-sm">{{ illustrator.novelCount }} works</div>
                   <router-link
                     :to="'/illustrator/' + illustrator.id"
                     class="text-sm"

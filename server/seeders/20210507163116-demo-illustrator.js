@@ -30,8 +30,20 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          name: "Shiokonbu",
-          jpName: "しおこんぶ",
+          name: "Reia",
+          jpName: "れい亜",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "bob",
+          jpName: "",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Takahiro Tsurusaki",
+          jpName: "鶴崎貴大",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

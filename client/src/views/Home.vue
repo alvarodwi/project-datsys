@@ -3,11 +3,18 @@
     <section class="w-full">
       <div class="flex flex-col md:flex-row">
         <div class="w-full md:w-1/2 pt-32 md:pt-64 overflow-hidden" id="left">
-          <img class="absolute top-0 w-full md:w-1/2 h-full" id="bgimg" src="../assets/img/bgimg.png" alt="bg" />
+          <img
+            class="absolute top-0 w-full md:w-1/2 h-full"
+            id="bgimg"
+            src="../assets/img/bgimg.png"
+            alt="bg"
+          />
           <p class="title" id="datsys">DatSys</p>
           <p class="title" id="project">Project</p>
           <hr id="redline" />
-          <p class ="mt-4 ml-8 text-sepia-500 tracking-widest">A light Novel Database</p>
+          <p class="mt-4 ml-8 text-sepia-500 tracking-widest">
+            A light Novel Database
+          </p>
         </div>
         <div class="w-full md:w-1/2">
           <img class="gambar" src="../assets/img/ram.jpg" alt="ram" />
@@ -50,7 +57,6 @@ export default {
 </script>
 
 <style scoped>
-
 #bgimg {
   z-index: -10;
   left: -40px;
@@ -92,11 +98,13 @@ export default {
 }
 
 #datsys {
+  font-family: 'Lexend Exa';
   margin: 0 0.5em;
   color: #f95851;
 }
 
 #project {
+  font-family: 'Lexend Exa';
   margin: 0 0.5em;
   color: #f5e2cf;
   margin-bottom: 0.8rem;

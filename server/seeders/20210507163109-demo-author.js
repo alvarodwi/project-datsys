@@ -35,6 +35,12 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Yukiya Murasaki",
+          jpName: "むらさきゆきや",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

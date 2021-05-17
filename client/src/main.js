@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "@/assets/css/tailwind.css";
+import "@/assets/css/main.css";
 import VueTailwind from "vue-tailwind";
 import { TPagination, TRichSelect } from "vue-tailwind/dist/components";
 

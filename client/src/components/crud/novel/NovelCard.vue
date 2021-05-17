@@ -20,11 +20,17 @@
           }}</span></router-link
         >
       </p>
+      <p id="info" v-else>
+        by unknown
+      </p>
       <p id="info" v-if="!_.isEmpty(novel.label)">
         published on
         <router-link :to="'/label/' + novel.label.id">
           <span class="text-2xl">{{ novel.label.name }}</span>
         </router-link>
+      </p>
+      <p id="info" v-else>
+        published on unknown
       </p>
       <div id="datevol" v-if="!_.isEmpty(novel.releases)">
         <p class="card-date">
