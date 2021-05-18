@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Projek UAS Praktikum Sistem Database",
   "scripts": {
-    "install-project": "cd server && npm install && cd ../client && npm install",
-    "start-server": "cd server && npm run dev",
-    "start-client": "cd client && npm run serve",
-    "build": "cd server && gulp && cd ../bin && npm install",
-    "start": "cd bin && npm run start"
+    "install": "cd server && npm install && cd ../client && npm install",
+    "dev-server": "cd server && npm run dev",
+    "dev-client": "cd client && npm run serve",
+    "build": "cd server && gulp",
+    "start": "cd bin && node server.bundle.js"
   },
   "repository": {
     "type": "git",

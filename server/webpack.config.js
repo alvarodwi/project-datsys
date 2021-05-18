@@ -11,7 +11,13 @@ module.exports = {
     path: path.resolve(__dirname, '.'),
     filename: 'server.bundle.js',
   },
-  externals: [nodeExternals()],
+  externals: ['pg', 'sqlite3', 'tedious', 'pg-hstore', nodeExternals({
+    modulesFromFile: {
+      fileName: './package.json',
+      includeInBundle: 'dependencies',
+      excludeFromBundle: 'devDependencies',
+    },
+  })],
   plugins: [
     new Dotenv(),
   ],

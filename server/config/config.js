@@ -1,3 +1,4 @@
+const mysql2 = require('mysql2');
 require('dotenv').config();
 
 module.exports = {
@@ -8,6 +9,7 @@ module.exports = {
   logging: false,
   host: process.env.DB_HOST,
   dialect: 'mysql',
+  dialectModule: mysql2,
   operatorsAliases: 0,
   timezone: '+07:00',
 };

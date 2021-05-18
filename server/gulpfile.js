@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
 const {src, dest, series, parallel} = require('gulp');
-const rename = require('gulp-rename');
 const del = require('del');
 const fs = require('fs');
 const zip = require('gulp-zip');
@@ -62,13 +61,6 @@ function copyNodeJSCodeTask() {
       .pipe(dest(`${paths.bin_folder}`));
 }
 
-function copyPackageJsonTask() {
-  log('copying package json to use for production');
-  return src(`${paths.prod_package_json}`)
-      .pipe(rename('package.json'))
-      .pipe(dest(`${paths.bin_folder}`));
-}
-
 function zippingTask() {
   log('zipping the code ');
   return src(`${paths.bin_folder}/**`)
@@ -81,6 +73,6 @@ exports.default = series(
     createBinFolder,
     buildVueCodeTask,
     buildNodeJsCodeTask,
-    parallel(copyVueCodeTask, copyNodeJSCodeTask, copyPackageJsonTask),
+    parallel(copyVueCodeTask, copyNodeJSCodeTask),
     zippingTask,
 );
