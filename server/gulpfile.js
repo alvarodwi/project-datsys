@@ -9,7 +9,7 @@ const exec = require('child_process').exec;
 const paths = {
   bin_folder: '../bin',
   server_file_name: './server.bundle.js',
-  prod_package_json: './production.package.json',
+  env_example_file_name: './.env.example',
   vue_src: '../client/dist/**/*',
   vue_dist: '../bin/views',
   zipped_file_name: 'project-datsys.zip',
@@ -58,6 +58,8 @@ function buildNodeJsCodeTask(cb) {
 function copyNodeJSCodeTask() {
   log('copying server code into the directory');
   return src(`${paths.server_file_name}`)
+      .pipe(dest(`${paths.bin_folder}`))
+      .pipe(src(`${paths.env_example_file_name}`))
       .pipe(dest(`${paths.bin_folder}`));
 }
 

@@ -1,5 +1,4 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
@@ -18,7 +17,4 @@ module.exports = {
       excludeFromBundle: 'devDependencies',
     },
   })],
-  plugins: [
-    new Dotenv(),
-  ],
 };
