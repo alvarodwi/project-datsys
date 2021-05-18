@@ -39,3 +39,17 @@ npm run start
 ```
 
 Akses [localhost:8090](localhost:8090) di browser untuk memastikan server telah berhasil dijalankan.
+
+## Catatan
+
+Untuk membuat versi production, jalankan perintah berikut di console : 
+
+```
+npm run build
+```
+
+Untuk membuat binary full (berisi server dan client), gunakan perintah berikut di console :
+
+```
+gulp
+```

@@ -16,6 +16,11 @@ Komponen dari aplikasi ini :
 - Server (berisi back-end dari aplikasi)
 - Wiki (berisi dokumen-dokumen penjelas dari aplikasi)
 
+Tech Stack yang digunakan :
+- Node JS + sequelize
+- Vue JS + axios + Tailwind CSS
+- MYSQL
+
 ## Panduan Memulai
 
 Proyek ini menggunakan npm. Pastikan `npm install` telah dijalankan melalui command line.
@@ -32,7 +37,7 @@ Untuk langkah mudah jalankan perintah berikut di root folder project ini :
 
 ```
 npm run build
-npm run start // untuk menjalankan project versi production build
+npm run start
 ```
 
 ## Lisensi
