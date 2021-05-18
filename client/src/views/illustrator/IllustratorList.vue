@@ -138,7 +138,7 @@ export default {
       }
 
       if (sortBy) {
-        params["sort_by"] = sortBy;
+        params["sortBy"] = sortBy;
       }
 
       if (ordering) {
